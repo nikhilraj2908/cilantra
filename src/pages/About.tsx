@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Users2, Lightbulb, Award, ShieldCheck } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
+import posterCollaboration from "@/assets/poster-collaboration.jpg";
 
 const keyFactors = [
   {
@@ -31,7 +32,7 @@ export default function AboutPage() {
   return (
     <SiteLayout>
       {/* Hero */}
-      <section className="section hero-bg relative overflow-hidden">
+      <section className="section section-waves relative overflow-hidden">
         <div className="container-px mx-auto max-w-7xl">
           <div className="max-w-2xl">
             <span className="eyebrow">About Cilantra</span>
@@ -48,7 +49,7 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="section">
+      <section className="section section-grid">
         <div className="container-px mx-auto max-w-7xl grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -101,12 +102,19 @@ export default function AboutPage() {
                 <div className="mt-1 text-xs text-muted-foreground">{lab}</div>
               </div>
             ))}
+            <div className="col-span-2 rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/9]">
+              <img
+                src={posterCollaboration}
+                alt="Cilantra Collaborative Team"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Key Factors */}
-      <section className="section sand-bg">
+      <section className="section section-dots">
         <div className="container-px mx-auto max-w-7xl">
           <div className="max-w-2xl mx-auto text-center">
             <span className="eyebrow">Why Choose Cilantra</span>
@@ -150,23 +158,28 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section">
+      <section className="section section-dark">
         <div className="container-px mx-auto max-w-4xl text-center">
-          <span className="eyebrow">Work with Us</span>
-          <h2 className="display-h2 mt-3">
+          <span className="eyebrow text-gold before:bg-gold">Work with Us</span>
+          <h2 className="display-h2 mt-3 text-white">
             Ready to take your work digitally?
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+          <p className="mt-4 text-white/80 max-w-xl mx-auto">
             Let's discuss your e-Learning or technology project and build a
             long-term partnership that delivers measurable results.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
+            <Button size="lg" variant="gold" asChild>
               <Link to="/contact">
                 Get in Touch <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10"
+              asChild
+            >
               <Link to="/services">View Solutions</Link>
             </Button>
           </div>

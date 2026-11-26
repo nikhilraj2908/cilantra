@@ -31,7 +31,7 @@ export function Header() {
           : "bg-background/60"
       }`}
     >
-      <div className="container-px mx-auto flex items-center justify-between max-w-7xl">
+      <div className="w-full px-4 sm:px-6 lg:px-10 flex items-center justify-between">
         <Logo />
 
         {/* Desktop nav */}

@@ -190,7 +190,7 @@ export default function ServicesPage() {
   return (
     <SiteLayout>
       {/* Hero */}
-      <section className="section hero-bg relative overflow-hidden">
+      <section className="section section-waves relative overflow-hidden">
         <div className="container-px mx-auto max-w-7xl">
           <div className="max-w-2xl">
             <span className="eyebrow">What We Do</span>
@@ -225,7 +225,7 @@ export default function ServicesPage() {
         <section
           key={s.id}
           id={s.id}
-          className={`section ${idx % 2 === 1 ? "sand-bg" : ""}`}
+          className={`section ${idx % 2 === 1 ? "section-dots" : "section-grid"}`}
         >
           <div className="container-px mx-auto max-w-7xl">
             <div className="grid lg:grid-cols-2 gap-12 items-start">

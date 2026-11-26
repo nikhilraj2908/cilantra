@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   CILANTRA DESIGN TOKENS
+   CILANTRA DESIGN TOKENS (Blue Theme – Finalized)
    ───────────────────────────────────────────────────────────────────────────
-   Brand colors extracted from the Cilantra logo:
-     Blue  → primary  (#4A6CF7  ~ hsl 231 90% 63%)
-     Gold  → gold     (#C9922A  ~ hsl 36  65% 48%)
-     Dark  → ink/text (#2D2D3A  ~ hsl 240 13% 21%)
+   Brand colors extracted from the Cilantra blue-theme logo (1.png):
+     Royal Blue → primary     (#0052FD  ~ hsl 221 100% 50%)
+     Sky Blue   → gold/accent (#479DFE  ~ hsl 212 99%  64%)
+     Deep Navy  → ink/text    (#00203D  ~ hsl 208 100% 12%)
 
    HOW TO CHANGE THE PALETTE
    ──────────────────────────
@@ -23,52 +23,52 @@
 
     /* ── Background & surface ───────────────────────────────────────────── */
     --background: 0 0% 100%;
-    --foreground: 240 13% 15%;
+    --foreground: 208 100% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 13% 15%;
+    --card-foreground: 208 100% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 13% 15%;
+    --popover-foreground: 208 100% 12%;
 
-    /* ── BRAND CHANGE HERE #1 → Blue (primary) ─────────────────────────── */
-    --primary: 231 90% 63%;           /* #4A6CF7 – Cilantra blue */
+    /* ── BRAND CHANGE HERE #1 → Royal Blue (primary) ───────────────────── */
+    --primary: 221 100% 50%;          /* #0052FD – Cilantra royal blue */
     --primary-foreground: 0 0% 100%;
-    --primary-soft: 231 90% 96%;
+    --primary-soft: 215 100% 96%;
 
-    /* ── BRAND CHANGE HERE #2 → Gold / Amber ───────────────────────────── */
-    --gold: 36 65% 48%;               /* #C9922A – Cilantra gold */
-    --gold-foreground: 36 80% 15%;
+    /* ── BRAND CHANGE HERE #2 → Sky Blue (secondary accent) ────────────── */
+    --gold: 212 99% 64%;              /* #479DFE – Cilantra sky blue */
+    --gold-foreground: 208 100% 12%;
 
-    /* ── BRAND CHANGE HERE #3 → Ink / Dark text ────────────────────────── */
-    --ink: 240 13% 21%;               /* #2D2D3A – Cilantra dark */
+    /* ── BRAND CHANGE HERE #3 → Deep Navy (ink / dark text) ────────────── */
+    --ink: 208 100% 12%;              /* #00203D – Cilantra deep navy */
 
     /* ── Neutrals (derived, rarely need changing) ───────────────────────── */
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 240 13% 21%;
+    --secondary: 214 32% 96%;
+    --secondary-foreground: 208 100% 12%;
 
-    --muted: 220 14% 95%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 214 32% 95%;
+    --muted-foreground: 209 22% 44%;
 
-    --accent: 231 90% 96%;
-    --accent-foreground: 231 90% 45%;
+    --accent: 215 100% 96%;
+    --accent-foreground: 221 100% 45%;
 
-    --sand: 36 30% 97%;
+    --sand: 214 45% 97%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 231 90% 63%;
+    --border: 214 25% 91%;
+    --input: 214 25% 91%;
+    --ring: 221 100% 50%;
 
     /* ── Gradients ──────────────────────────────────────────────────────── */
     --gradient-hero: radial-gradient(1200px 600px at 80% -10%,
-        hsl(231 90% 63% / 0.12), transparent 60%),
+        hsl(221 100% 50% / 0.12), transparent 60%),
       radial-gradient(900px 500px at 0% 0%,
-        hsl(36 65% 48% / 0.10), transparent 60%),
-      linear-gradient(180deg, hsl(231 90% 99%), hsl(0 0% 100%));
-    --gradient-band: linear-gradient(180deg, hsl(36 30% 97%), hsl(0 0% 100%));
+        hsl(212 99% 64% / 0.14), transparent 60%),
+      linear-gradient(180deg, hsl(215 100% 99%), hsl(0 0% 100%));
+    --gradient-band: linear-gradient(180deg, hsl(214 45% 97%), hsl(0 0% 100%));
   }
 
   .dark {
@@ -160,6 +160,32 @@
   .hero-bg { background: var(--gradient-hero); }
   .band-bg { background: var(--gradient-band); }
   .sand-bg { background: hsl(var(--sand)); }
+
+  .section-dots {
+    background-color: hsl(214 45% 98%);
+    background-image: url("/src/assets/bg-dots.svg");
+    background-repeat: repeat;
+  }
+  .section-grid {
+    background-color: hsl(0 0% 100%);
+    background-image: url("/src/assets/bg-grid.svg");
+    background-repeat: repeat;
+  }
+  .section-waves {
+    background-color: hsl(215 100% 98%);
+    background-image: url("/src/assets/bg-waves.svg");
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+  }
+  .section-dark {
+    background-color: #00203D;
+    background-image: url("/src/assets/bg-dark-mesh.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+  }
 
   /* ── Card ───────────────────────────────────────────────────────────── */
   .card-elegant {

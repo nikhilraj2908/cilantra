@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="mt-2 border-t border-border bg-[#1a1a2e]">
+    <footer className="mt-2 border-t border-border bg-[#00203D]">
       <div className="container-px mx-auto max-w-7xl py-16 grid gap-12 md:grid-cols-4">
         {/* Brand block */}
         <div className="md:col-span-2">

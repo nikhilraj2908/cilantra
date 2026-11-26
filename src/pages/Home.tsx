@@ -27,6 +27,10 @@ import {
 import { useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
+import heroWorkspace from "@/assets/hero-workspace.png";
+import posterElearning from "@/assets/poster-elearning.jpg";
+import posterTechnology from "@/assets/poster-technology.jpg";
+import posterCollaboration from "@/assets/poster-collaboration.jpg";
 
 /* ── Brand data ─────────────────────────────────────────────────────────── */
 const industries = [
@@ -115,14 +119,14 @@ export default function HomePage() {
 /* ── Hero ───────────────────────────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="hero-bg relative overflow-hidden py-24 md:py-32">
+    <section
+      className="relative overflow-hidden py-24 md:py-32 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${heroWorkspace})` }}
+    >
+      {/* Left-to-right readability overlay so text stays crisp while artwork shines on the right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 right-0 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-40 left-0 h-[400px] w-[400px] rounded-full bg-gold/10 blur-3xl"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20"
       />
 
       <div className="container-px mx-auto max-w-7xl relative z-10">
@@ -170,7 +174,7 @@ function HeroSection() {
 /* ── Stats ──────────────────────────────────────────────────────────────── */
 function StatsSection() {
   return (
-    <section className="section band-bg">
+    <section className="section section-dark">
       <div className="container-px mx-auto max-w-7xl">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s, i) => (
@@ -182,10 +186,10 @@ function StatsSection() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="text-center"
             >
-              <div className="text-4xl font-display font-bold text-primary">
+              <div className="text-4xl md:text-5xl font-display font-bold text-gold">
                 {s.value}
               </div>
-              <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
+              <div className="mt-1.5 text-sm text-white/80">{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -197,18 +201,36 @@ function StatsSection() {
 /* ── Services grid ──────────────────────────────────────────────────────── */
 function ServicesSection() {
   return (
-    <section className="section">
+    <section className="section section-grid">
       <div className="container-px mx-auto max-w-7xl">
-        <div className="max-w-2xl">
-          <span className="eyebrow">Explore Our Solutions</span>
-          <h2 className="display-h2 mt-3">
-            e-Learning &amp; Technology Solutions
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Our solutions are divided into two core pillars — e-Learning design
-            solutions and Technology solutions — engineered to elevate your
-            business digitally.
-          </p>
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-6">
+            <span className="eyebrow">Explore Our Solutions</span>
+            <h2 className="display-h2 mt-3">
+              e-Learning &amp; Technology Solutions
+            </h2>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              Our solutions are divided into two core pillars — e-Learning design
+              solutions and Technology solutions — engineered to elevate your
+              business digitally.
+            </p>
+          </div>
+          <div className="lg:col-span-6 grid grid-cols-2 gap-4">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/10] bg-card">
+              <img
+                src={posterElearning}
+                alt="Custom e-Learning Solutions"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/10] bg-card">
+              <img
+                src={posterTechnology}
+                alt="Technology & Digital Platforms"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -252,7 +274,7 @@ function ServicesSection() {
 /* ── Differentiators ────────────────────────────────────────────────────── */
 function DifferentiatorsSection() {
   return (
-    <section className="section sand-bg">
+    <section className="section section-dots">
       <div className="container-px mx-auto max-w-7xl">
         <div className="max-w-2xl mx-auto text-center">
           <span className="eyebrow">Why Choose Us</span>
@@ -295,9 +317,9 @@ function DifferentiatorsSection() {
 /* ── e-Learning Principles ──────────────────────────────────────────────── */
 function PrinciplesSection() {
   return (
-    <section className="section">
-      <div className="container-px mx-auto max-w-7xl grid lg:grid-cols-2 gap-12 items-center">
-        <div>
+    <section className="section section-grid">
+      <div className="container-px mx-auto max-w-7xl grid lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-5">
           <span className="eyebrow">Our Approach to e-Learning</span>
           <h2 className="display-h2 mt-3">
             Compelling experiences for web &amp; mobile
@@ -307,8 +329,15 @@ function PrinciplesSection() {
             or immersive AR/VR modules, our instructional designers and
             software engineers craft learning that engages and sticks.
           </p>
+          <div className="mt-6 rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/10]">
+            <img
+              src={posterCollaboration}
+              alt="Collaborative Digital Learning Strategy"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
           {elearningPrinciples.map((item) => (
             <div key={item} className="card-elegant p-5 flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -324,7 +353,7 @@ function PrinciplesSection() {
 /* ── Industries ─────────────────────────────────────────────────────────── */
 function IndustriesSection() {
   return (
-    <section className="section sand-bg">
+    <section className="section section-waves">
       <div className="container-px mx-auto max-w-7xl">
         <div className="text-center max-w-2xl mx-auto">
           <span className="eyebrow">Industry Solutions</span>
@@ -385,7 +414,7 @@ function TestimonialsSection() {
   const next = () => setActive((v) => (v + 1) % testimonials.length);
 
   return (
-    <section className="section">
+    <section className="section section-dots">
       <div className="container-px mx-auto max-w-4xl">
         <div className="text-center">
           <span className="eyebrow">Client Trust</span>
@@ -447,7 +476,7 @@ function TestimonialsSection() {
 /* ── CTA ────────────────────────────────────────────────────────────────── */
 function CTASection() {
   return (
-    <section className="section">
+    <section className="section section-grid">
       <div className="container-px mx-auto max-w-6xl">
         <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-8 md:p-12 shadow-elegant">
           <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold/30 blur-3xl pointer-events-none" />
