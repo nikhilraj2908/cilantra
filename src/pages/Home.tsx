@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   ArrowRight,
   Building2,
@@ -24,13 +24,19 @@ import {
   Clock,
   Lightbulb,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import heroWorkspace from "@/assets/hero-workspace.png";
+import heroBanner2 from "@/assets/hero-banner-2.png";
 import posterElearning from "@/assets/poster-elearning.jpg";
 import posterTechnology from "@/assets/poster-technology.jpg";
 import posterCollaboration from "@/assets/poster-collaboration.jpg";
+
+const heroSlides = [
+  { src: heroWorkspace, alt: "Modern E-Learning Workspace" },
+  { src: heroBanner2, alt: "Modern E-Learning Technology Banner" },
+];
 
 /* ── Brand data ─────────────────────────────────────────────────────────── */
 const industries = [
@@ -118,51 +124,100 @@ export default function HomePage() {
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
 function HeroSection() {
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSlide((s) => (s + 1) % heroSlides.length);
+    }, 5500);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <section
-      className="relative overflow-hidden py-24 md:py-32 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${heroWorkspace})` }}
-    >
-      {/* Left-to-right readability overlay so text stays crisp while artwork shines on the right */}
+    <section className="relative overflow-hidden py-24 md:py-32 bg-white">
+      {/* 2-slide auto-playing hero background carousel */}
+      <AnimatePresence mode="sync">
+        <motion.img
+          key={heroSlides[slide].src}
+          src={heroSlides[slide].src}
+          alt={heroSlides[slide].alt}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+      </AnimatePresence>
+
+      {/* Left-to-right readability gradient */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#ffffff]/90 via-[#ffffff]/15 to-transparent"
       />
 
       <div className="container-px mx-auto max-w-7xl relative z-10">
-        <div className="max-w-3xl">
-          <span className="eyebrow">Think Big. We Do Solutions.</span>
-          <h1 className="display-h1 mt-4 text-foreground">
+        <div className="max-w-2xl">
+          <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#F89E2C]">
+            <span className="block h-px w-7 bg-[#F89E2C]" />
+            Think Big. We Do Solutions.
+          </span>
+          <h1 className="display-h1 mt-4 text-black">
             e-Learning &amp; Technology{" "}
-            <span className="text-primary">Solutions.</span>
+            <span className="text-[#FF5E0D]">Solutions.</span>
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl">
+          <p className="mt-6 text-lg text-black/85 leading-relaxed max-w-xl">
             Get what's finest for your business's growth and take your work
             digitally with Cilantra. We help organizations looking to train
             their employees, partners, and customers switch to web and
             mobile-based learning and digital platforms.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button size="lg" asChild>
+            <Button
+              size="lg"
+              className="bg-[#FF5E0D] text-white hover:bg-[#EB061A] shadow-[0_10px_30px_rgba(255,94,13,0.4)]"
+              asChild
+            >
               <Link to="/contact">
                 Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-black text-[#ffffff] border-white hover:bg-black/80"
+              asChild
+            >
               <Link to="/services">Explore Solutions</Link>
             </Button>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-6 text-sm text-muted-foreground">
+          <div className="mt-10 flex flex-wrap items-center gap-6 text-sm text-black/85">
             {[
               "50+ In-house specialists",
               "35+ Clients across 4 continents",
               "No-subcontract quality guarantee",
             ].map((t) => (
               <span key={t} className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
+                <CheckCircle2 className="h-4 w-4 text-[#F89E2C]" />
                 {t}
               </span>
+            ))}
+          </div>
+
+          {/* Slide switcher dots */}
+          <div className="mt-8 flex items-center gap-2">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Show slide ${i + 1}`}
+                onClick={() => setSlide(i)}
+                className={`h-2 rounded-full transition-all ${
+                  slide === i
+                    ? "w-8 bg-[#FF5E0D]"
+                    : "w-2 bg-black/25 hover:bg-black/50"
+                }`}
+              />
             ))}
           </div>
         </div>
@@ -172,6 +227,41 @@ function HeroSection() {
 }
 
 /* ── Stats ──────────────────────────────────────────────────────────────── */
+function AnimatedCounter({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const match = value.match(/^(\d+)(.*)$/);
+  const target = match ? parseInt(match[1], 10) : 0;
+  const suffix = match ? match[2] : "";
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let rafId = 0;
+    const duration = 1600;
+    const start = performance.now();
+
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) {
+        rafId = requestAnimationFrame(step);
+      }
+    };
+
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
+  }, [inView, target]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 function StatsSection() {
   return (
     <section className="section section-dark">
@@ -186,8 +276,8 @@ function StatsSection() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="text-center"
             >
-              <div className="text-4xl md:text-5xl font-display font-bold text-gold">
-                {s.value}
+              <div className="text-4xl md:text-5xl font-display font-bold text-gold tabular-nums">
+                <AnimatedCounter value={s.value} />
               </div>
               <div className="mt-1.5 text-sm text-white/80">{s.label}</div>
             </motion.div>
@@ -478,20 +568,21 @@ function CTASection() {
   return (
     <section className="section section-grid">
       <div className="container-px mx-auto max-w-6xl">
-        <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-8 md:p-12 shadow-elegant">
-          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold/30 blur-3xl pointer-events-none" />
+        <div className="relative overflow-hidden rounded-3xl bg-[#18121E] text-white p-8 md:p-12 shadow-elegant border border-white/10">
+          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#FF5E0D]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -left-16 -bottom-20 h-64 w-64 rounded-full bg-[#EB061A]/20 blur-3xl pointer-events-none" />
           <div className="relative grid md:grid-cols-3 gap-8 items-center">
             <div className="md:col-span-2">
-              <span className="text-xs font-semibold uppercase tracking-widest text-gold">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#F89E2C]">
                 Let's build together
               </span>
-              <div className="mt-2 h-0.5 w-10 bg-gold" />
-              <h3 className="display-h2 mt-5">
+              <div className="mt-2 h-0.5 w-10 bg-[#F89E2C]" />
+              <h3 className="display-h2 mt-5 text-white">
                 Ready to take your work digitally?
                 <br />
                 Let's build the right solution.
               </h3>
-              <p className="mt-4 text-primary-foreground/80 max-w-xl leading-relaxed">
+              <p className="mt-4 text-white/80 max-w-xl leading-relaxed">
                 From custom e-Learning, gamification, and Moodle LMS to web &amp;
                 mobile apps, 3D animation, and AR/VR — we deliver integrated
                 solutions built for your business growth.
@@ -500,8 +591,7 @@ function CTASection() {
             <div className="flex flex-col items-start gap-3 md:items-end">
               <Button
                 size="lg"
-                variant="gold"
-                className="min-w-[220px]"
+                className="min-w-[220px] bg-[#FF5E0D] text-white hover:bg-[#EB061A] shadow-[0_10px_30px_rgba(255,94,13,0.35)]"
                 asChild
               >
                 <Link to="/contact">
@@ -511,18 +601,18 @@ function CTASection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="min-w-[220px] border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                className="min-w-[220px] bg-transparent border-white/35 text-white hover:bg-white/10 hover:text-white"
                 asChild
               >
                 <Link to="/services">Explore Solutions</Link>
               </Button>
             </div>
           </div>
-          <div className="relative mt-10 pt-6 border-t border-primary-foreground/15 flex items-center justify-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-              <Users2 className="h-4 w-4" />
+          <div className="relative mt-10 pt-6 border-t border-white/15 flex items-center justify-center gap-3">
+            <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center">
+              <Users2 className="h-4 w-4 text-[#F89E2C]" />
             </div>
-            <p className="text-sm text-primary-foreground/80">
+            <p className="text-sm text-white/80">
               Think Big. We Do Solutions.
             </p>
           </div>

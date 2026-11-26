@@ -25,13 +25,13 @@ export function Header() {
 
   return (
     <header
-      className={`sticky py-1 top-0 z-50 backdrop-blur-md transition-all ${
+      className={`sticky py-2.5 top-0 z-50 backdrop-blur-md transition-all border-b ${
         scrolled
-          ? "bg-background/85 border-b border-border"
-          : "bg-background/60"
+          ? "bg-background/90 border-[#FF5E0D]/20 shadow-[0_6px_24px_-2px_rgba(255,94,13,0.24)]"
+          : "bg-background/75 border-[#FF5E0D]/15 shadow-[0_4px_20px_-2px_rgba(255,94,13,0.16)]"
       }`}
     >
-      <div className="w-full px-4 sm:px-6 lg:px-10 flex items-center justify-between">
+      <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <Logo />
 
         {/* Desktop nav */}

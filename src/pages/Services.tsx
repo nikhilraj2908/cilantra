@@ -277,19 +277,22 @@ export default function ServicesPage() {
               </motion.div>
             </div>
 
-            <div className="mt-10 relative overflow-hidden rounded-2xl bg-primary text-primary-foreground p-6 md:p-8 shadow-elegant">
-              <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-gold/20 blur-3xl pointer-events-none" />
+            <div className="mt-10 relative overflow-hidden rounded-2xl bg-[#18121E] text-white p-6 md:p-8 shadow-elegant border border-white/10">
+              <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-[#FF5E0D]/25 blur-3xl pointer-events-none" />
               <div className="relative flex flex-col md:flex-row md:items-center gap-6">
-                <div className="h-14 w-14 rounded-2xl bg-primary-foreground/10 flex items-center justify-center shrink-0">
-                  <s.icon className="h-7 w-7" />
+                <div className="h-14 w-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                  <s.icon className="h-7 w-7 text-[#F89E2C]" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-display text-xl">{s.ctaTitle}</h4>
-                  <p className="mt-1 text-primary-foreground/80 text-sm max-w-xl">
+                  <h4 className="font-display text-xl text-white">{s.ctaTitle}</h4>
+                  <p className="mt-1 text-white/80 text-sm max-w-xl">
                     {s.ctaBody}
                   </p>
                 </div>
-                <Button variant="gold" asChild className="shrink-0">
+                <Button
+                  asChild
+                  className="shrink-0 bg-[#FF5E0D] text-white hover:bg-[#EB061A]"
+                >
                   <Link to="/contact">
                     Talk to Us <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
