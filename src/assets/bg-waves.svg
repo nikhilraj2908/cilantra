@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 480" fill="none" preserveAspectRatio="none">
   <defs>
     <linearGradient id="waveGrad1" x1="0" y1="0" x2="1440" y2="480" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0052FD" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#479DFE" stop-opacity="0.02"/>
+      <stop offset="0%" stop-color="#FF5E0D" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#F89E2C" stop-opacity="0.03"/>
     </linearGradient>
     <linearGradient id="waveGrad2" x1="1440" y1="0" x2="0" y2="480" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#479DFE" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#0052FD" stop-opacity="0.01"/>
+      <stop offset="0%" stop-color="#EB061A" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#F89E2C" stop-opacity="0.02"/>
     </linearGradient>
   </defs>
   <path d="M0 140C240 60 480 220 720 150C960 80 1200 20 1440 110V480H0V140Z" fill="url(#waveGrad1)"/>
   <path d="M0 240C300 320 600 140 900 210C1140 266 1320 180 1440 220V480H0V240Z" fill="url(#waveGrad2)"/>
-  <path d="M0 140C240 60 480 220 720 150C960 80 1200 20 1440 110" stroke="#0052FD" stroke-opacity="0.09" stroke-width="1.5"/>
-  <path d="M0 240C300 320 600 140 900 210C1140 266 1320 180 1440 220" stroke="#479DFE" stroke-opacity="0.12" stroke-width="1.5"/>
+  <path d="M0 140C240 60 480 220 720 150C960 80 1200 20 1440 110" stroke="#FF5E0D" stroke-opacity="0.11" stroke-width="1.5"/>
+  <path d="M0 240C300 320 600 140 900 210C1140 266 1320 180 1440 220" stroke="#F89E2C" stroke-opacity="0.14" stroke-width="1.5"/>
 </svg>

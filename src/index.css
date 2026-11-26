@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   CILANTRA DESIGN TOKENS (Blue Theme – Finalized)
+   CILANTRA DESIGN TOKENS (Finalized – 3.png Palette)
    ───────────────────────────────────────────────────────────────────────────
-   Brand colors extracted from the Cilantra blue-theme logo (1.png):
-     Royal Blue → primary     (#0052FD  ~ hsl 221 100% 50%)
-     Sky Blue   → gold/accent (#479DFE  ~ hsl 212 99%  64%)
-     Deep Navy  → ink/text    (#00203D  ~ hsl 208 100% 12%)
+   Brand colors from the Cilantra logo (3.png) & color swatch:
+     Flame Orange → primary     (#FF5E0D  ~ hsl 20  100% 53%)
+     Warm Amber   → gold/accent (#F89E2C  ~ hsl 34  94%  57%)
+     Crimson Red  → crimson     (#EB061A  ~ hsl 355 95%  47%)
+     Deep Navy    → ink/text    (#00203D  ~ hsl 208 100% 12%)
 
    HOW TO CHANGE THE PALETTE
    ──────────────────────────
@@ -31,44 +32,45 @@
     --popover: 0 0% 100%;
     --popover-foreground: 208 100% 12%;
 
-    /* ── BRAND CHANGE HERE #1 → Royal Blue (primary) ───────────────────── */
-    --primary: 221 100% 50%;          /* #0052FD – Cilantra royal blue */
+    /* ── BRAND CHANGE HERE #1 → Flame Orange (primary) ─────────────────── */
+    --primary: 20 100% 53%;           /* #FF5E0D – Cilantra flame orange */
     --primary-foreground: 0 0% 100%;
-    --primary-soft: 215 100% 96%;
+    --primary-soft: 24 100% 96%;
 
-    /* ── BRAND CHANGE HERE #2 → Sky Blue (secondary accent) ────────────── */
-    --gold: 212 99% 64%;              /* #479DFE – Cilantra sky blue */
+    /* ── BRAND CHANGE HERE #2 → Warm Amber (secondary accent) ──────────── */
+    --gold: 34 94% 57%;               /* #F89E2C – Cilantra warm amber */
     --gold-foreground: 208 100% 12%;
 
     /* ── BRAND CHANGE HERE #3 → Deep Navy (ink / dark text) ────────────── */
     --ink: 208 100% 12%;              /* #00203D – Cilantra deep navy */
+    --crimson: 355 95% 47%;           /* #EB061A – Cilantra crimson red */
 
     /* ── Neutrals (derived, rarely need changing) ───────────────────────── */
-    --secondary: 214 32% 96%;
+    --secondary: 30 30% 96%;
     --secondary-foreground: 208 100% 12%;
 
-    --muted: 214 32% 95%;
-    --muted-foreground: 209 22% 44%;
+    --muted: 30 25% 95%;
+    --muted-foreground: 215 16% 44%;
 
-    --accent: 215 100% 96%;
-    --accent-foreground: 221 100% 45%;
+    --accent: 24 100% 96%;
+    --accent-foreground: 20 100% 45%;
 
-    --sand: 214 45% 97%;
+    --sand: 32 45% 97%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 355 95% 47%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 25% 91%;
-    --input: 214 25% 91%;
-    --ring: 221 100% 50%;
+    --border: 28 22% 90%;
+    --input: 28 22% 90%;
+    --ring: 20 100% 53%;
 
     /* ── Gradients ──────────────────────────────────────────────────────── */
     --gradient-hero: radial-gradient(1200px 600px at 80% -10%,
-        hsl(221 100% 50% / 0.12), transparent 60%),
+        hsl(20 100% 53% / 0.12), transparent 60%),
       radial-gradient(900px 500px at 0% 0%,
-        hsl(212 99% 64% / 0.14), transparent 60%),
-      linear-gradient(180deg, hsl(215 100% 99%), hsl(0 0% 100%));
-    --gradient-band: linear-gradient(180deg, hsl(214 45% 97%), hsl(0 0% 100%));
+        hsl(34 94% 57% / 0.14), transparent 60%),
+      linear-gradient(180deg, hsl(30 100% 98%), hsl(0 0% 100%));
+    --gradient-band: linear-gradient(180deg, hsl(32 45% 97%), hsl(0 0% 100%));
   }
 
   .dark {
@@ -162,7 +164,7 @@
   .sand-bg { background: hsl(var(--sand)); }
 
   .section-dots {
-    background-color: hsl(214 45% 98%);
+    background-color: hsl(32 45% 98%);
     background-image: url("/src/assets/bg-dots.svg");
     background-repeat: repeat;
   }
@@ -172,14 +174,14 @@
     background-repeat: repeat;
   }
   .section-waves {
-    background-color: hsl(215 100% 98%);
+    background-color: hsl(28 60% 98%);
     background-image: url("/src/assets/bg-waves.svg");
     background-size: cover;
     background-position: bottom center;
     background-repeat: no-repeat;
   }
   .section-dark {
-    background-color: #00203D;
+    background-color: #18121E;
     background-image: url("/src/assets/bg-dark-mesh.svg");
     background-size: cover;
     background-position: center;

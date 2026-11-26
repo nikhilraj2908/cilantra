@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <rect width="64" height="64" rx="14" fill="#FFFFFF"/>
-  <!-- Bar 1 (sky blue) -->
-  <circle cx="16" cy="37" r="5" fill="#479DFE"/>
-  <rect x="11" y="45" width="10" height="7" rx="3" fill="#479DFE"/>
-  <!-- Bar 2 (medium blue) -->
-  <circle cx="32" cy="27" r="5.5" fill="#1374FE"/>
-  <rect x="26.5" y="35.5" width="11" height="16.5" rx="3" fill="#1374FE"/>
-  <!-- Bar 3 (royal blue) -->
-  <circle cx="48" cy="16" r="6" fill="#0052FD"/>
-  <rect x="42" y="25" width="12" height="27" rx="3.5" fill="#0052FD"/>
+  <!-- Bar 1 (amber #F89E2C) -->
+  <circle cx="16" cy="37" r="5" fill="#F89E2C"/>
+  <rect x="11" y="45" width="10" height="7" rx="3" fill="#F89E2C"/>
+  <!-- Bar 2 (orange #FF5E0D) -->
+  <circle cx="32" cy="27" r="5.5" fill="#FF5E0D"/>
+  <rect x="26.5" y="35.5" width="11" height="16.5" rx="3" fill="#FF5E0D"/>
+  <!-- Bar 3 (red #EB061A) -->
+  <circle cx="48" cy="16" r="6" fill="#EB061A"/>
+  <rect x="42" y="25" width="12" height="27" rx="3.5" fill="#EB061A"/>
 </svg>
