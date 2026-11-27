@@ -39,12 +39,15 @@ import {
   Mic2,
   Volume2,
   Zap,
+  Landmark,
+  Plane,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import heroCollabTech from "@/assets/hero-collab-tech.png";
 import heroCollabTeam from "@/assets/hero-collab-team.png";
+import heroFuturisticElearning from "@/assets/hero-futuristic-elearning.png";
 import aboutTeam from "@/assets/about-team.jpg";
 import servicesElearningBg from "@/assets/services-elearning-bg.jpg";
 import servicesTechBg from "@/assets/services-tech-bg.jpg";
@@ -54,7 +57,7 @@ import posterTechnology from "@/assets/poster-technology.jpg";
 const heroSlides = [
   { src: heroCollabTeam, alt: "Collaborative Teamwork in a Modern Office", word: "become." },
   { src: heroCollabTech, alt: "Collaborative Corporate Tech Training", word: "achieve." },
-  { src: heroCollabTeam, alt: "Collaborative Teamwork in a Modern Office", word: "create." },
+  { src: heroFuturisticElearning, alt: "Futuristic E-Learning Interface in Modern Office", word: "create." },
   { src: heroCollabTech, alt: "Collaborative Corporate Tech Training", word: "transform." },
 ];
 
@@ -167,7 +170,15 @@ function HeroSection() {
           src={heroCollabTech}
           alt="Collaborative Corporate Tech Training"
           initial={false}
-          animate={{ opacity: slide % 2 === 1 ? 1 : 0 }}
+          animate={{ opacity: heroSlides[slide].src === heroCollabTech ? 1 : 0 }}
+          transition={{ duration: 1.05, ease: "easeInOut" }}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <motion.img
+          src={heroFuturisticElearning}
+          alt="Futuristic E-Learning Interface in Modern Office"
+          initial={false}
+          animate={{ opacity: heroSlides[slide].src === heroFuturisticElearning ? 1 : 0 }}
           transition={{ duration: 1.05, ease: "easeInOut" }}
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
@@ -436,7 +447,7 @@ function WhatDrivesUsSection() {
         </div>
 
         {/* Four beliefs. One purpose. — tight 4-column card grid */}
-        <div id="four-beliefs" className="mt-12 pt-10 border-t border-border/80">
+        <div id="four-beliefs" className="mt-12">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
             <h3 className="font-display font-semibold text-2xl text-[#00203D]">
               Four beliefs. <span className="text-[#FF5E0D]">One purpose.</span>
@@ -484,7 +495,7 @@ function WhatDrivesUsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-8 relative overflow-hidden rounded-2xl bg-[#00203D] text-white px-6 py-8 md:px-12 md:py-9 text-center shadow-elegant border border-white/10"
+          className="mt-8 relative overflow-hidden rounded-2xl bg-[#1E1B18] text-white px-6 py-8 md:px-12 md:py-9 text-center shadow-elegant border border-white/10"
         >
           <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#FF5E0D]/20 blur-3xl pointer-events-none" />
           <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[#F89E2C]/15 blur-3xl pointer-events-none" />
@@ -828,8 +839,63 @@ const sixSolutions = [
 
 function DifferentiatorsSection() {
   return (
-    <section className="section section-dots">
-      <div className="container-px mx-auto max-w-6xl">
+    <section className="section relative overflow-hidden bg-gradient-to-b from-white via-[#FAF8F5] to-white">
+      {/* Minimal corner halftone dot clusters (masked so center stays 100% clean) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 h-64 w-64 opacity-[0.22]"
+        style={{
+          backgroundImage: "radial-gradient(#FF5E0D 1.35px, transparent 1.35px)",
+          backgroundSize: "16px 16px",
+          WebkitMaskImage: "radial-gradient(circle at 0% 0%, black 0%, transparent 72%)",
+          maskImage: "radial-gradient(circle at 0% 0%, black 0%, transparent 72%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 opacity-[0.2]"
+        style={{
+          backgroundImage: "radial-gradient(#F89E2C 1.35px, transparent 1.35px)",
+          backgroundSize: "16px 16px",
+          WebkitMaskImage: "radial-gradient(circle at 100% 100%, black 0%, transparent 72%)",
+          maskImage: "radial-gradient(circle at 100% 100%, black 0%, transparent 72%)",
+        }}
+      />
+
+      {/* Delicate flowing contour lines in top-right & bottom-left corners */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 360 220"
+        fill="none"
+        className="pointer-events-none absolute top-0 right-0 w-72 md:w-96 h-44 md:h-56 opacity-[0.22]"
+      >
+        <path d="M40,0 C120,65 210,45 360,125" stroke="#FF5E0D" strokeWidth="1.2" strokeOpacity="0.45" />
+        <path d="M80,0 C150,75 235,60 360,150" stroke="#FF5E0D" strokeWidth="1" strokeOpacity="0.32" />
+        <path d="M120,0 C180,85 260,75 360,175" stroke="#F89E2C" strokeWidth="1" strokeOpacity="0.28" />
+        <path d="M165,0 C215,92 285,92 360,200" stroke="#F89E2C" strokeWidth="0.9" strokeOpacity="0.22" />
+      </svg>
+
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 360 220"
+        fill="none"
+        className="pointer-events-none absolute bottom-0 left-0 w-72 md:w-96 h-44 md:h-56 opacity-[0.22]"
+      >
+        <path d="M0,95 C130,140 215,125 310,220" stroke="#FF5E0D" strokeWidth="1.2" strokeOpacity="0.4" />
+        <path d="M0,125 C115,162 195,152 275,220" stroke="#FF5E0D" strokeWidth="1" strokeOpacity="0.3" />
+        <path d="M0,155 C95,184 170,178 240,220" stroke="#F89E2C" strokeWidth="1" strokeOpacity="0.25" />
+      </svg>
+
+      {/* Calm ambient warm glows */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#FF5E0D]/[0.045] blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#F89E2C]/[0.05] blur-3xl"
+      />
+      <div className="container-px mx-auto max-w-6xl relative">
         <div className="max-w-3xl mx-auto text-center">
           <span className="eyebrow">WHY CHOOSE US</span>
           <h2 className="display-h2 mt-3 text-[#00203D]">
@@ -849,7 +915,7 @@ function DifferentiatorsSection() {
           </p>
         </div>
 
-        <div className="mt-12 pt-10 border-t border-border/80">
+        <div className="mt-12">
           <h3 className="font-display font-semibold text-2xl text-[#00203D]">
             Six solutions. <span className="text-[#FF5E0D]">Endless possibilities.</span>
           </h3>
@@ -892,7 +958,7 @@ function DifferentiatorsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mt-10 relative overflow-hidden rounded-2xl bg-[#00203D] text-white px-6 py-8 md:px-12 md:py-10 text-center shadow-elegant border border-white/10"
+            className="mt-10 relative overflow-hidden rounded-2xl bg-[#1E1B18] text-white px-6 py-8 md:px-12 md:py-10 text-center shadow-elegant border border-white/10"
           >
             <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#FF5E0D]/20 blur-3xl pointer-events-none" />
             <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[#F89E2C]/15 blur-3xl pointer-events-none" />
@@ -923,30 +989,116 @@ function DifferentiatorsSection() {
 /* ── Industries ─────────────────────────────────────────────────────────── */
 function IndustriesSection() {
   return (
-    <section id="industries" className="section section-waves">
-      <div className="container-px mx-auto max-w-7xl">
+    <section
+      id="industries"
+      className="section relative overflow-hidden bg-gradient-to-b from-[#FAF8F5] via-[#FFF9F4] to-[#FDF5EC]"
+    >
+      {/* Top-left subtle flowing orange wave */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 360 180"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute top-0 left-0 w-56 md:w-80 h-28 md:h-40 opacity-60"
+      >
+        <path
+          d="M0,120 C90,95 160,40 240,0 L0,0 Z"
+          fill="#FF5E0D"
+          fillOpacity="0.14"
+        />
+        <path
+          d="M0,145 C100,110 180,55 290,0"
+          fill="none"
+          stroke="#FF5E0D"
+          strokeOpacity="0.28"
+          strokeWidth="2"
+        />
+      </svg>
+
+      {/* Top-right subtle global network wireframe sphere */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 260 260"
+        className="pointer-events-none absolute -top-6 right-4 md:right-12 w-56 h-56 md:w-72 md:h-72 text-[#D97706] opacity-[0.13]"
+      >
+        <circle cx="130" cy="130" r="105" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        <ellipse cx="130" cy="130" rx="52" ry="105" fill="none" stroke="currentColor" strokeWidth="1" />
+        <ellipse cx="130" cy="130" rx="105" ry="42" fill="none" stroke="currentColor" strokeWidth="1" />
+        <ellipse cx="130" cy="130" rx="105" ry="78" fill="none" stroke="currentColor" strokeWidth="0.8" />
+        <line x1="25" y1="130" x2="235" y2="130" stroke="currentColor" strokeWidth="0.9" />
+        <line x1="130" y1="25" x2="130" y2="235" stroke="currentColor" strokeWidth="0.9" />
+        <circle cx="88" cy="96" r="3" fill="#FF5E0D" />
+        <circle cx="164" cy="108" r="3.5" fill="#FF5E0D" />
+        <circle cx="145" cy="162" r="2.8" fill="#FF5E0D" />
+      </svg>
+
+      {/* Subtle bottom-left faint skyline silhouette */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 600 90"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute bottom-0 left-0 w-72 md:w-[500px] h-16 md:h-24 text-[#1E1B18] opacity-[0.045]"
+      >
+        <path
+          d="M0,90 L0,55 L18,55 L18,32 L36,32 L36,52 L54,52 L54,20 L74,20 L74,58 L95,58 L95,38 L120,38 L120,62 L145,62 L145,26 L168,26 L168,54 L195,54 L195,42 L222,42 L222,68 L250,68 L250,46 L278,46 L278,72 L320,72 L320,58 L360,58 L360,76 L420,76 L420,90 Z"
+          fill="currentColor"
+        />
+      </svg>
+
+      {/* Bottom-right warm orange wave sweep */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 500 120"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute bottom-0 right-0 w-72 md:w-[440px] h-16 md:h-28"
+      >
+        <path
+          d="M0,120 C140,108 260,74 380,38 C435,22 472,8 500,0 L500,120 Z"
+          fill="#FF5E0D"
+          fillOpacity="0.82"
+        />
+        <path
+          d="M90,120 C210,104 320,78 440,46 L500,30 L500,120 Z"
+          fill="#F89E2C"
+          fillOpacity="0.4"
+        />
+      </svg>
+
+      <div className="container-px mx-auto max-w-7xl relative">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="eyebrow">Industry Solutions</span>
-          <h2 className="display-h2 mt-3">Sectors we serve globally</h2>
-          <p className="mt-4 text-muted-foreground">
+          <span className="inline-flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF5E0D]">
+            <span className="h-[1px] w-7 bg-[#FF5E0D]/50" />
+            Industry Solutions
+            <span className="h-[1px] w-7 bg-[#FF5E0D]/50" />
+          </span>
+          <h2 className="mt-3 font-display text-3xl md:text-4xl font-bold tracking-tight text-[#1E1B18]">
+            Sectors we serve <span className="text-[#FF5E0D]">globally</span>
+          </h2>
+          <p className="mt-3 text-sm md:text-base text-[#574F49]">
             Serving 35+ clients across 4 continents with domain-tailored
             e-Learning and technology solutions.
           </p>
         </div>
+
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {industries.map((ind, i) => (
             <motion.div
               key={ind.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="card-elegant p-5 text-center"
+              transition={{ duration: 0.35, delay: i * 0.05 }}
+              className="group relative rounded-2xl bg-white border border-black/[0.05] px-4 pt-6 pb-7 text-center shadow-[0_14px_34px_-18px_rgba(30,27,24,0.18)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(255,94,13,0.22)] transition-all flex flex-col items-center justify-center min-h-[164px]"
             >
-              <div className="mx-auto h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <ind.icon className="h-5 w-5 text-primary" />
+              <div className="mx-auto h-14 w-14 rounded-full bg-[#FFF4EE] flex items-center justify-center shrink-0">
+                <ind.icon className="h-7 w-7 text-[#FF5E0D]" strokeWidth={1.6} />
               </div>
-              <p className="mt-3 text-xs font-semibold">{ind.label}</p>
+              <p className="mt-4 text-xs sm:text-[13px] font-semibold text-[#1E1B18] leading-snug">
+                {ind.label}
+              </p>
+              <span
+                aria-hidden="true"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3.5px] w-10 rounded-t-full bg-[#FF5E0D] group-hover:w-14 transition-all"
+              />
             </motion.div>
           ))}
         </div>
