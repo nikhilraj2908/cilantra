@@ -1087,12 +1087,12 @@ function IndustriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
-              className="group relative rounded-2xl bg-white border border-black/[0.05] px-4 pt-6 pb-7 text-center shadow-[0_14px_34px_-18px_rgba(30,27,24,0.18)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(255,94,13,0.22)] transition-all flex flex-col items-center justify-center min-h-[164px]"
+              className="group relative rounded-2xl bg-white border border-black/[0.06] px-4 pt-6 pb-7 text-center shadow-[0_16px_38px_-10px_rgba(30,27,24,0.2)] hover:-translate-y-1 hover:shadow-[0_24px_48px_-12px_rgba(255,94,13,0.28)] transition-all flex flex-col items-center justify-center min-h-[168px]"
             >
-              <div className="mx-auto h-14 w-14 rounded-full bg-[#FFF4EE] flex items-center justify-center shrink-0">
-                <ind.icon className="h-7 w-7 text-[#FF5E0D]" strokeWidth={1.6} />
+              <div className="mx-auto h-16 w-16 rounded-full bg-[#FFF4EE] flex items-center justify-center shrink-0">
+                <ind.icon className="h-8 w-8 text-[#FF5E0D]" strokeWidth={1.65} />
               </div>
-              <p className="mt-4 text-xs sm:text-[13px] font-semibold text-[#1E1B18] leading-snug">
+              <p className="mt-4 text-sm sm:text-[15px] font-semibold text-[#1E1B18] leading-snug">
                 {ind.label}
               </p>
               <span

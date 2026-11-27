@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
@@ -18,9 +19,36 @@ import AdminStories from "@/pages/admin/Stories";
 import AdminStoryEditor from "@/pages/admin/StoryEditor";
 import AdminMessages from "@/pages/admin/Messages";
 
+function ScrollToTop() {
+  const { pathname, hash, key } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const scrollToHash = () => {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+          return true;
+        }
+        return false;
+      };
+      if (!scrollToHash()) {
+        requestAnimationFrame(() => {
+          scrollToHash();
+        });
+      }
+      return;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+  }, [pathname, hash, key]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         {/* Public */}
         <Route path="/" element={<HomePage />} />
