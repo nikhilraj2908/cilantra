@@ -41,8 +41,8 @@ export function Footer() {
             {[
               ["/about", "About Us"],
               ["/services", "Services"],
-              ["/success-stories", "Success Stories"],
-              ["/insights", "Insights & Resources"],
+              ["/insights", "Industry We Serve"],
+              ["/success-stories", "Our Work"],
               ["/contact", "Contact"],
             ].map(([to, label]) => (
               <li key={to}>

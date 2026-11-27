@@ -1,5 +1,13 @@
-import { Link } from "react-router-dom";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+  type MotionValue,
+} from "framer-motion";
 import {
   ArrowRight,
   Building2,
@@ -15,27 +23,39 @@ import {
   Palette,
   Headphones,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
   Users2,
   Sparkles,
   Award,
   ShieldCheck,
   Clock,
   Lightbulb,
+  Compass,
+  Fingerprint,
+  TrendingUp,
+  Box,
+  Layers,
+  GraduationCap,
+  Glasses,
+  Mic2,
+  Volume2,
+  Zap,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
-import heroWorkspace from "@/assets/hero-workspace.png";
-import heroBanner2 from "@/assets/hero-banner-2.png";
-import posterElearning from "@/assets/poster-elearning.jpg";
+import heroCollabTech from "@/assets/hero-collab-tech.png";
+import heroCollabTeam from "@/assets/hero-collab-team.png";
+import aboutTeam from "@/assets/about-team.jpg";
+import servicesElearningBg from "@/assets/services-elearning-bg.jpg";
+import servicesTechBg from "@/assets/services-tech-bg.jpg";
+import servicesVrBg from "@/assets/services-vr-bg.jpg";
 import posterTechnology from "@/assets/poster-technology.jpg";
-import posterCollaboration from "@/assets/poster-collaboration.jpg";
 
 const heroSlides = [
-  { src: heroWorkspace, alt: "Modern E-Learning Workspace" },
-  { src: heroBanner2, alt: "Modern E-Learning Technology Banner" },
+  { src: heroCollabTeam, alt: "Collaborative Teamwork in a Modern Office", word: "become." },
+  { src: heroCollabTech, alt: "Collaborative Corporate Tech Training", word: "achieve." },
+  { src: heroCollabTeam, alt: "Collaborative Teamwork in a Modern Office", word: "create." },
+  { src: heroCollabTech, alt: "Collaborative Corporate Tech Training", word: "transform." },
 ];
 
 /* ── Brand data ─────────────────────────────────────────────────────────── */
@@ -97,26 +117,27 @@ const stats = [
   { value: "4", label: "Continents Served" },
 ];
 
-const elearningPrinciples = [
-  "Use scenario-based learning for real-world application",
-  "Keep training curriculum role-based and relevant",
-  "Incorporate visual mediums such as 3D graphics and simulations",
-  "Emotional engagement: put the learner at the center of the narrative",
-  "Add interactivity tools such as gamification for reinforcement",
-  "Use microlearning to deliver critical concepts effectively",
-];
-
 /* ── Page ───────────────────────────────────────────────────────────────── */
 export default function HomePage() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [hash]);
+
   return (
     <SiteLayout>
       <HeroSection />
       <StatsSection />
+      <WhatDrivesUsSection />
       <ServicesSection />
       <DifferentiatorsSection />
-      <PrinciplesSection />
       <IndustriesSection />
-      <TestimonialsSection />
       <CTASection />
     </SiteLayout>
   );
@@ -134,88 +155,137 @@ function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32 bg-white">
-      {/* 2-slide auto-playing hero background carousel */}
-      <AnimatePresence mode="sync">
+    <section className="relative overflow-hidden py-20 md:py-28 bg-[#FDFBF8]">
+      {/* Permanently mounted crossfade layers (zero unmount flash or opacity dip) */}
+      <div className="absolute inset-0">
+        <img
+          src={heroCollabTeam}
+          alt="Collaborative Teamwork in a Modern Office"
+          className="h-full w-full object-cover object-center"
+        />
         <motion.img
-          key={heroSlides[slide].src}
-          src={heroSlides[slide].src}
-          alt={heroSlides[slide].alt}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          src={heroCollabTech}
+          alt="Collaborative Corporate Tech Training"
+          initial={false}
+          animate={{ opacity: slide % 2 === 1 ? 1 : 0 }}
+          transition={{ duration: 1.05, ease: "easeInOut" }}
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-      </AnimatePresence>
+      </div>
 
-      {/* Left-to-right readability gradient */}
+      {/* Center-feathered readability gradient (no solid white patch on far left) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#ffffff]/90 via-[#ffffff]/15 to-transparent"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(253,251,248,0.68) 0%, rgba(253,251,248,0.86) 28%, rgba(253,251,248,0.82) 45%, rgba(253,251,248,0.34) 62%, rgba(253,251,248,0) 76%)",
+        }}
       />
+      {/* Mobile subtle readability veil */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[#FDFBF8]/55 lg:hidden"
+      />
+
+      {/* Subtle warm orange bottom-right wave accent */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 600 140"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute bottom-0 right-0 w-[340px] md:w-[520px] h-[72px] md:h-[108px] z-[5]"
+      >
+        <path
+          d="M0,140 C160,130 270,88 410,55 C500,34 555,14 600,0 L600,140 Z"
+          fill="#FF5E0D"
+          fillOpacity="0.9"
+        />
+        <path
+          d="M80,140 C220,122 330,96 470,68 C535,54 575,40 600,28 L600,140 Z"
+          fill="#F89E2C"
+          fillOpacity="0.45"
+        />
+      </svg>
 
       <div className="container-px mx-auto max-w-7xl relative z-10">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#F89E2C]">
+          <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#D97706]">
             <span className="block h-px w-7 bg-[#F89E2C]" />
-            Think Big. We Do Solutions.
+            BEYOND LEARNING. BEYOND TECHNOLOGY.
           </span>
-          <h1 className="display-h1 mt-4 text-black">
-            e-Learning &amp; Technology{" "}
-            <span className="text-[#FF5E0D]">Solutions.</span>
+          <h1 className="font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[1.08] mt-4 text-[#1E1B18] font-bold tracking-tight">
+            Imagine what your people
+            <br />
+            <span className="whitespace-nowrap">
+              could{" "}
+              <span className="inline-block text-[#FF5E0D]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={heroSlides[slide].word}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.35 }}
+                    className="inline-block"
+                  >
+                    {heroSlides[slide].word}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </span>
           </h1>
-          <p className="mt-6 text-lg text-black/85 leading-relaxed max-w-xl">
-            Get what's finest for your business's growth and take your work
-            digitally with Cilantra. We help organizations looking to train
-            their employees, partners, and customers switch to web and
-            mobile-based learning and digital platforms.
+          <p className="mt-5 text-base md:text-[17px] text-[#574F49] leading-relaxed max-w-lg">
+            We believe the greatest possibilities lie within people. Through
+            transformative learning experiences, innovative technologies and
+            connected digital platforms, Cilantra empowers organisations to
+            unlock human potential and create lasting business impact.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              size="lg"
-              className="bg-[#FF5E0D] text-white hover:bg-[#EB061A] shadow-[0_10px_30px_rgba(255,94,13,0.4)]"
-              asChild
+          <div className="mt-7">
+            <Link
+              to="/services"
+              className="group inline-flex items-center gap-3 text-base font-semibold tracking-tight text-[#FF5E0D] hover:text-[#EB061A] transition-colors"
             >
-              <Link to="/contact">
-                Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-black text-[#ffffff] border-white hover:bg-black/80"
-              asChild
-            >
-              <Link to="/services">Explore Solutions</Link>
-            </Button>
+              <span>Explore the Possibilities</span>
+              <motion.span
+                aria-hidden="true"
+                animate={{ x: [0, 6, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="inline-flex items-center text-[#FF5E0D]"
+              >
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </motion.span>
+            </Link>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-6 text-sm text-black/85">
+          <div className="mt-9 flex flex-wrap lg:flex-nowrap items-center gap-x-5 gap-y-2.5 text-xs sm:text-[13px] lg:whitespace-nowrap text-[#574F49]">
             {[
               "50+ In-house specialists",
               "35+ Clients across 4 continents",
               "No-subcontract quality guarantee",
             ].map((t) => (
-              <span key={t} className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-[#F89E2C]" />
+              <span key={t} className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="h-4 w-4 text-[#F89E2C] shrink-0" />
                 {t}
               </span>
             ))}
           </div>
 
           {/* Slide switcher dots */}
-          <div className="mt-8 flex items-center gap-2">
+          <div className="mt-7 flex items-center gap-2">
             {heroSlides.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 aria-label={`Show slide ${i + 1}`}
                 onClick={() => setSlide(i)}
-                className={`h-2 rounded-full transition-all ${
+                className={`h-1.5 rounded-full transition-all ${
                   slide === i
-                    ? "w-8 bg-[#FF5E0D]"
-                    : "w-2 bg-black/25 hover:bg-black/50"
+                    ? "w-7 bg-[#FF5E0D]"
+                    : "w-1.5 bg-black/20 hover:bg-black/45"
                 }`}
               />
             ))}
@@ -288,73 +358,416 @@ function StatsSection() {
   );
 }
 
-/* ── Services grid ──────────────────────────────────────────────────────── */
-function ServicesSection() {
+/* ── What Drives Us / About Us ─────────────────────────────────────────── */
+const beliefs = [
+  {
+    num: "01",
+    tag: "Learning strategy",
+    icon: Compass,
+    title: "Every ambition deserves a direction.",
+    body: "Learning designed around your business goals, not predefined templates.",
+  },
+  {
+    num: "02",
+    tag: "Custom eLearning",
+    icon: Fingerprint,
+    title: "Every learner deserves a meaningful experience.",
+    body: "Purpose-built learning that connects, engages and empowers.",
+  },
+  {
+    num: "03",
+    tag: "Digital innovation",
+    icon: Lightbulb,
+    title: "Every challenge holds a possibility.",
+    body: "Technology that simplifies complexity and opens new opportunities.",
+  },
+  {
+    num: "04",
+    tag: "Business impact",
+    icon: TrendingUp,
+    title: "Every experience should make a difference.",
+    body: "Solutions focused on stronger capabilities, better performance and sustainable growth.",
+  },
+];
+
+function WhatDrivesUsSection() {
   return (
-    <section className="section section-grid">
-      <div className="container-px mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-6">
-            <span className="eyebrow">Explore Our Solutions</span>
-            <h2 className="display-h2 mt-3">
-              e-Learning &amp; Technology Solutions
+    <section className="section section-dots relative">
+      <div className="container-px mx-auto max-w-6xl">
+        {/* Top split: Copy on left, Team image on right */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-6"
+          >
+            <span className="eyebrow">WHAT DRIVES US</span>
+            <h2 className="display-h2 mt-3 text-[#00203D]">
+              What we create matters.
+              <span className="block text-[#FF5E0D] mt-1">
+                What you become matters more.
+              </span>
             </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Our solutions are divided into two core pillars — e-Learning design
-              solutions and Technology solutions — engineered to elevate your
-              business digitally.
+            <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
+              From personalised learning experiences to scalable digital
+              platforms, our purpose goes beyond delivering solutions. We help
+              organisations turn knowledge into capability, challenges into
+              opportunities and ambitions into meaningful progress.
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-6"
+          >
+            <div className="rounded-3xl overflow-hidden border border-[#FF5E0D]/15 shadow-elegant aspect-[16/10] bg-card">
+              <img
+                src={aboutTeam}
+                alt="Cilantra team collaborating"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Four beliefs. One purpose. — tight 4-column card grid */}
+        <div id="four-beliefs" className="mt-12 pt-10 border-t border-border/80">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+            <h3 className="font-display font-semibold text-2xl text-[#00203D]">
+              Four beliefs. <span className="text-[#FF5E0D]">One purpose.</span>
+            </h3>
+            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+              Our Core Philosophy
+            </span>
           </div>
-          <div className="lg:col-span-6 grid grid-cols-2 gap-4">
-            <div className="rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/10] bg-card">
-              <img
-                src={posterElearning}
-                alt="Custom e-Learning Solutions"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/10] bg-card">
-              <img
-                src={posterTechnology}
-                alt="Technology & Digital Platforms"
-                className="h-full w-full object-cover"
-              />
-            </div>
+
+          <div className="mt-7 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {beliefs.map((b, i) => (
+              <motion.div
+                key={b.num}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="card-elegant p-6 flex flex-col bg-card/95"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-xl bg-[#FF5E0D]/10 flex items-center justify-center text-[#FF5E0D]">
+                    <b.icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs font-semibold text-[#F89E2C] tracking-wider">
+                    {b.num}
+                  </span>
+                </div>
+                <div className="mt-4 text-[0.72rem] font-semibold uppercase tracking-wider text-muted-foreground">
+                  {b.tag}
+                </div>
+                <h4 className="mt-1.5 font-display font-semibold text-base text-[#00203D] leading-snug">
+                  {b.title}
+                </h4>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                  {b.body}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((s, i) => (
-            <motion.a
-              key={s.title}
-              href={s.href}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="card-elegant p-6 group flex items-start gap-4"
-            >
-              <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                <s.icon className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <div className="font-display font-semibold text-foreground">
-                  {s.title}
+        {/* Purpose & impact banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-8 relative overflow-hidden rounded-2xl bg-[#00203D] text-white px-6 py-8 md:px-12 md:py-9 text-center shadow-elegant border border-white/10"
+        >
+          <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#FF5E0D]/20 blur-3xl pointer-events-none" />
+          <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[#F89E2C]/15 blur-3xl pointer-events-none" />
+          <h3 className="relative font-display font-semibold text-xl md:text-2xl text-white">
+            Driven by purpose. Defined by impact.
+          </h3>
+          <p className="relative mt-2.5 text-sm md:text-base text-white/85 max-w-2xl mx-auto leading-relaxed">
+            Everything we do is guided by one purpose — helping people and
+            businesses become more than they are today.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Services Showcase Carousel ─────────────────────────────────────────── */
+const serviceSlides = [
+  {
+    badge: "CUSTOM ELEARNING",
+    highlight: "Custom eLearning Solutions",
+    rest: "People Actually Want to Complete",
+    description:
+      "Learning content built from the ground up for your workforce, business scenarios, and global audiences — from microlearning to interactive simulations at scale.",
+    bullets: [
+      "Custom eLearning Built For Measurable Capability",
+      "Video & Motion That Simplifies Complexity",
+      "Microlearning Designed For Lasting Retention",
+      "Immersive Learning That Changes Behavior",
+      "Role-Based & Scenario-Driven Curricula",
+    ],
+    ctaLabel: "Explore Custom eLearning",
+    ctaHref: "/services#custom-elearning",
+    bg: servicesElearningBg,
+    cards: [
+      { icon: Video, title: "Video", sub: "Live & animated" },
+      { icon: Gamepad2, title: "Gamification", sub: "Engaging mechanics" },
+      { icon: BookOpen, title: "eLearning", sub: "SCORM/xAPI ready" },
+      { icon: Zap, title: "Microlearning", sub: "Bite-sized modules" },
+    ],
+  },
+  {
+    badge: "GAME-BASED & 3D",
+    highlight: "Game-Based Learning & 3D",
+    rest: "Built for Higher Engagement",
+    description:
+      "Transform passive training into memorable interactive challenges with gamification, branching scenarios, 3D product simulations, and Flash to HTML5 modernization.",
+    bullets: [
+      "Interactive Learning Games & Leaderboards",
+      "2D/3D Animations & Technical Simulations",
+      "Flash to HTML5 Legacy Course Conversion",
+      "Whiteboard Explainers & Visual Storytelling",
+      "SME-Authored Assessments & Feedback",
+    ],
+    ctaLabel: "Explore Game-Based & 3D",
+    ctaHref: "/services#gamification",
+    bg: posterTechnology,
+    cards: [
+      { icon: Gamepad2, title: "Game-Based", sub: "Challenges & badges" },
+      { icon: Box, title: "3D Design", sub: "Product simulations" },
+      { icon: Layers, title: "Flash to HTML5", sub: "Modern migration" },
+      { icon: Sparkles, title: "Animation", sub: "2D/3D explainers" },
+    ],
+  },
+  {
+    badge: "TECHNOLOGY & LMS",
+    highlight: "Websites, Apps & Moodle LMS",
+    rest: "Engineered to Scale",
+    description:
+      "Full-stack web and mobile platforms paired with customized Moodle LMS deployments — backed by 99% uptime, quarterly quality checks, and 24/7 support.",
+    bullets: [
+      "Custom Websites & Enterprise Web Portals",
+      "Cross-Platform Mobile Apps (iOS & Android)",
+      "Moodle LMS Setup, Theming & Plugins",
+      "Branding, UI/UX & Design Systems",
+      "24/7 Support & 99% Uptime Reliability",
+    ],
+    ctaLabel: "Explore Tech & LMS",
+    ctaHref: "/services#web-lms",
+    bg: servicesTechBg,
+    cards: [
+      { icon: Globe, title: "Web & Apps", sub: "Full-stack platforms" },
+      { icon: GraduationCap, title: "Moodle LMS", sub: "Custom & managed" },
+      { icon: Palette, title: "UI/UX Design", sub: "Intuitive interfaces" },
+      { icon: Cpu, title: "99% Uptime", sub: "24/7 global ops" },
+    ],
+  },
+  {
+    badge: "AR / VR & AUDIO",
+    highlight: "Immersive AR / VR & Studio Audio",
+    rest: "for Hands-On Mastery",
+    description:
+      "Bridge physical and digital environments with Augmented and Virtual Reality training simulations, elevated by studio-grade voiceovers and sound mixing.",
+    bullets: [
+      "Virtual Reality (VR) Safety & Skill Labs",
+      "Augmented Reality (AR) Guided Workflows",
+      "Multilingual Voiceover Recording",
+      "Broadcast-Grade Sound Mixing & SFX",
+      "Interactive Spatial 3D Learning",
+    ],
+    ctaLabel: "Explore AR / VR & Audio",
+    ctaHref: "/services#ar-vr-audio",
+    bg: servicesVrBg,
+    cards: [
+      { icon: Glasses, title: "Virtual Reality", sub: "Safe practice labs" },
+      { icon: Box, title: "Augmented Reality", sub: "Spatial overlays" },
+      { icon: Mic2, title: "Voice Recording", sub: "Multilingual VO" },
+      { icon: Volume2, title: "Sound Mixing", sub: "Studio mastering" },
+    ],
+  },
+];
+
+type ServiceSlide = (typeof serviceSlides)[number];
+
+function ServiceSlideLayer({
+  slide,
+  index,
+  total,
+  scrollYProgress,
+}: {
+  slide: ServiceSlide;
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const start = index === 0 ? 0 : (index - 1) / (total - 1);
+  const end = index === 0 ? 0 : index / (total - 1);
+  const x = useTransform(
+    scrollYProgress,
+    [start, end],
+    index === 0 ? ["0%", "0%"] : ["100%", "0%"],
+  );
+
+  return (
+    <motion.div
+      style={{ x: index === 0 ? "0%" : x, zIndex: 10 + index }}
+      className={`absolute inset-0 flex items-center bg-[#141018] overflow-hidden ${
+        index > 0 ? "shadow-[-24px_0_60px_rgba(0,0,0,0.7)]" : ""
+      }`}
+    >
+      {/* Full-bleed dark background image */}
+      <img
+        src={slide.bg}
+        alt={slide.badge}
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+
+      {/* Dark editorial scrim */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#120d16]/95 via-[#120d16]/80 to-[#120d16]/55"
+      />
+
+      <div className="container-px mx-auto max-w-6xl relative z-10 py-12">
+        {/* Full-width badge + heading across the top */}
+        <div>
+          <span className="inline-block rounded-full bg-[#FF5E0D] px-3.5 py-1 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white">
+            {slide.badge}
+          </span>
+
+          <h2 className="display-h2 font-bold mt-4 text-white leading-tight max-w-5xl">
+            <span className="text-[#F89E2C]">{slide.highlight}</span>{" "}
+            {slide.rest}
+          </h2>
+        </div>
+
+        <div className="mt-6 grid lg:grid-cols-12 gap-10 items-start">
+          {/* Left column */}
+          <div className="lg:col-span-7">
+            <p className="text-base text-white/80 leading-relaxed max-w-xl">
+              {slide.description}
+            </p>
+
+            <ul className="mt-6 space-y-2.5">
+              {slide.bullets.map((b) => (
+                <li
+                  key={b}
+                  className="flex items-center gap-2.5 text-sm text-white/90"
+                >
+                  <CheckCircle2 className="h-4 w-4 text-[#F89E2C] shrink-0" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8">
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-full bg-transparent border-[#F89E2C]/60 text-white hover:bg-[#FF5E0D] hover:border-[#FF5E0D] hover:text-white px-7"
+                asChild
+              >
+                <Link to={slide.ctaHref}>
+                  {slide.ctaLabel} <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Right column: 2x2 frosted glassmorphism cards */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            {slide.cards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <div
+                  key={card.title}
+                  className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 hover:bg-white/15 hover:border-[#FF5E0D]/50 transition-all"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-[#FF5E0D]/15 border border-[#FF5E0D]/30 flex items-center justify-center text-[#F89E2C] mb-3.5">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="font-display font-semibold text-lg text-white">
+                    {card.title}
+                  </div>
+                  <div className="mt-1 text-sm text-white/75">{card.sub}</div>
                 </div>
-                <div className="mt-1 inline-flex items-center text-xs text-primary font-medium">
-                  Learn more <ArrowRight className="ml-1 h-3 w-3" />
-                </div>
-              </div>
-            </motion.a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ServicesSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const idx = Math.min(
+      serviceSlides.length - 1,
+      Math.max(0, Math.round(latest * (serviceSlides.length - 1))),
+    );
+    setActive(idx);
+  });
+
+  const scrollToSlide = (idx: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    const maxScroll = el.offsetHeight - window.innerHeight;
+    const targetY = top + (idx / (serviceSlides.length - 1)) * maxScroll;
+    window.scrollTo({ top: targetY, behavior: "smooth" });
+  };
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative bg-[#141018] text-white"
+      style={{ height: `${serviceSlides.length * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {serviceSlides.map((slide, index) => (
+          <ServiceSlideLayer
+            key={slide.badge}
+            slide={slide}
+            index={index}
+            total={serviceSlides.length}
+            scrollYProgress={scrollYProgress}
+          />
+        ))}
+
+        {/* Bottom indicator dots */}
+        <div className="absolute bottom-7 inset-x-0 z-50 flex items-center justify-center gap-2.5">
+          {serviceSlides.map((s, i) => (
+            <button
+              key={s.badge}
+              type="button"
+              aria-label={`Scroll to ${s.badge}`}
+              onClick={() => scrollToSlide(i)}
+              className={`h-2.5 rounded-full transition-all ${
+                active === i
+                  ? "w-7 bg-[#FF5E0D]"
+                  : "w-2.5 bg-white/30 hover:bg-white/60"
+              }`}
+            />
           ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <Button variant="outline" asChild>
-            <Link to="/services">
-              View All Solutions <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
         </div>
       </div>
     </section>
@@ -362,78 +775,145 @@ function ServicesSection() {
 }
 
 /* ── Differentiators ────────────────────────────────────────────────────── */
+const sixSolutions = [
+  {
+    num: "01",
+    tag: "Custom eLearning Solutions",
+    icon: BookOpen,
+    title: "Turn knowledge into capability.",
+    body: "Create meaningful learning experiences that help people not just know more, but do more.",
+    href: "/services#custom-elearning",
+  },
+  {
+    num: "02",
+    tag: "Game-Based eLearning",
+    icon: Gamepad2,
+    title: "Make learning something people look forward to.",
+    body: "Transform passive training into engaging challenges that inspire participation and improve retention.",
+    href: "/services#gamification",
+  },
+  {
+    num: "03",
+    tag: "Video, Animation & 3D",
+    icon: Video,
+    title: "Make the invisible understandable.",
+    body: "Bring complex concepts, processes and ideas to life through powerful visual storytelling.",
+    href: "/services#video-animation",
+  },
+  {
+    num: "04",
+    tag: "Websites, Apps & Moodle LMS",
+    icon: Globe,
+    title: "Connect people. Remove boundaries.",
+    body: "Build digital platforms that make learning, working and connecting easier — wherever people are.",
+    href: "/services#web-lms",
+  },
+  {
+    num: "05",
+    tag: "Branding, UI/UX & Microlearning",
+    icon: Palette,
+    title: "Make every interaction matter.",
+    body: "Create intuitive, memorable and purposeful experiences that connect people with your brand and knowledge.",
+    href: "/services#branding-design",
+  },
+  {
+    num: "06",
+    tag: "AR/VR & Audio Production",
+    icon: Headphones,
+    title: "Go beyond the ordinary experience.",
+    body: "Create immersive experiences that allow people to explore, practise and learn beyond traditional boundaries.",
+    href: "/services#ar-vr-audio",
+  },
+];
+
 function DifferentiatorsSection() {
   return (
     <section className="section section-dots">
-      <div className="container-px mx-auto max-w-7xl">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="eyebrow">Why Choose Us</span>
-          <h2 className="display-h2 mt-3">
-            An integrated, tech-enabled partner
+      <div className="container-px mx-auto max-w-6xl">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="eyebrow">WHY CHOOSE US</span>
+          <h2 className="display-h2 mt-3 text-[#00203D]">
+            Your success isn&apos;t just our responsibility.
+            <span className="block text-[#FF5E0D] mt-1">
+              It&apos;s our shared ambition.
+            </span>
           </h2>
-          <p className="mt-3 text-muted-foreground">
-            For most of our customers, we're more than just a vendor — we're
-            their long-term strategic partner.
+          <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
+            Great partnerships are built on more than expertise. They are built
+            on trust, shared ambitions and the commitment to make things better
+            together.
+          </p>
+          <p className="mt-3 text-base text-[#00203D]/85 font-medium leading-relaxed">
+            At Cilantra, we bring people, creativity and technology together to
+            become more than a service provider — a partner in your progress.
           </p>
         </div>
 
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {differentiators.map((d, i) => (
-            <motion.div
-              key={d.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="card-elegant p-6"
-            >
-              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <d.icon className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="mt-4 font-display font-semibold text-lg">
-                {d.title}
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                {d.body}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+        <div className="mt-12 pt-10 border-t border-border/80">
+          <h3 className="font-display font-semibold text-2xl text-[#00203D]">
+            Six solutions. <span className="text-[#FF5E0D]">Endless possibilities.</span>
+          </h3>
 
-/* ── e-Learning Principles ──────────────────────────────────────────────── */
-function PrinciplesSection() {
-  return (
-    <section className="section section-grid">
-      <div className="container-px mx-auto max-w-7xl grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-5">
-          <span className="eyebrow">Our Approach to e-Learning</span>
-          <h2 className="display-h2 mt-3">
-            Compelling experiences for web &amp; mobile
-          </h2>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            Whether it's Flash to HTML5 conversion, Moodle LMS customization,
-            or immersive AR/VR modules, our instructional designers and
-            software engineers craft learning that engages and sticks.
-          </p>
-          <div className="mt-6 rounded-2xl overflow-hidden border border-border shadow-soft aspect-[16/10]">
-            <img
-              src={posterCollaboration}
-              alt="Collaborative Digital Learning Strategy"
-              className="h-full w-full object-cover"
-            />
+          <div className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sixSolutions.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="card-elegant p-6 flex flex-col bg-card/95"
+              >
+                <div className="h-10 w-10 rounded-xl bg-[#FF5E0D]/10 flex items-center justify-center text-[#FF5E0D]">
+                  <s.icon className="h-5 w-5" />
+                </div>
+                <div className="mt-4 text-xs font-medium text-muted-foreground tracking-wide">
+                  {s.num} — {s.tag}
+                </div>
+                <h4 className="mt-1.5 font-display font-semibold text-lg text-[#00203D] leading-snug">
+                  {s.title}
+                </h4>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
+                  {s.body}
+                </p>
+                <a
+                  href={s.href}
+                  className="mt-4 inline-flex items-center text-sm font-medium text-[#FF5E0D] hover:text-[#EB061A] transition-colors"
+                >
+                  Explore solutions <ArrowRight className="ml-1.5 h-4 w-4" />
+                </a>
+              </motion.div>
+            ))}
           </div>
-        </div>
-        <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-          {elearningPrinciples.map((item) => (
-            <div key={item} className="card-elegant p-5 flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-              <p className="text-sm text-foreground leading-relaxed">{item}</p>
+
+          {/* Ambition CTA banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 relative overflow-hidden rounded-2xl bg-[#00203D] text-white px-6 py-8 md:px-12 md:py-10 text-center shadow-elegant border border-white/10"
+          >
+            <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#FF5E0D]/20 blur-3xl pointer-events-none" />
+            <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[#F89E2C]/15 blur-3xl pointer-events-none" />
+            <h3 className="relative font-display font-semibold text-xl md:text-2xl text-white">
+              The possibilities begin with your ambition.
+            </h3>
+            <p className="relative mt-2 text-sm md:text-base text-white/85">
+              Let&apos;s build something that makes a difference.
+            </p>
+            <div className="relative mt-6">
+              <Button
+                size="lg"
+                className="bg-[#FF5E0D] text-white hover:bg-[#EB061A] shadow-[0_10px_30px_rgba(255,94,13,0.35)]"
+                asChild
+              >
+                <Link to="/services">
+                  Explore What&apos;s Possible <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
-          ))}
+          </motion.div>
         </div>
       </div>
     </section>
@@ -443,7 +923,7 @@ function PrinciplesSection() {
 /* ── Industries ─────────────────────────────────────────────────────────── */
 function IndustriesSection() {
   return (
-    <section className="section section-waves">
+    <section id="industries" className="section section-waves">
       <div className="container-px mx-auto max-w-7xl">
         <div className="text-center max-w-2xl mx-auto">
           <span className="eyebrow">Industry Solutions</span>
@@ -469,94 +949,6 @@ function IndustriesSection() {
               <p className="mt-3 text-xs font-semibold">{ind.label}</p>
             </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── Testimonials ───────────────────────────────────────────────────────── */
-const testimonials = [
-  {
-    quote:
-      "Their adherence to processes, flexibility, and dedicated in-house team made them a true long-term strategic partner for our global training rollout.",
-    name: "VP Learning & Development",
-    role: "Global Enterprise Client",
-  },
-  {
-    quote:
-      "Converting our legacy modules to interactive HTML5 and game-based e-learning boosted learner engagement and completion rates dramatically.",
-    name: "Head of Digital Learning",
-    role: "BFSI Organisation",
-  },
-  {
-    quote:
-      "From Moodle LMS setup to custom 3D animations and voiceover production, they delivered an integrated end-to-end solution on schedule.",
-    name: "Director of Operations",
-    role: "Technology & EdTech Partner",
-  },
-];
-
-function TestimonialsSection() {
-  const [active, setActive] = useState(0);
-
-  const prev = () => setActive((v) => (v - 1 + testimonials.length) % testimonials.length);
-  const next = () => setActive((v) => (v + 1) % testimonials.length);
-
-  return (
-    <section className="section section-dots">
-      <div className="container-px mx-auto max-w-4xl">
-        <div className="text-center">
-          <span className="eyebrow">Client Trust</span>
-          <h2 className="display-h2 mt-3">What our partners say</h2>
-        </div>
-        <div className="relative mt-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.35 }}
-              className="card-elegant p-8 md:p-12 text-center"
-            >
-              <Sparkles className="mx-auto h-8 w-8 text-gold mb-4" />
-              <p className="text-lg md:text-xl text-foreground leading-relaxed">
-                "{testimonials[active].quote}"
-              </p>
-              <div className="mt-6">
-                <div className="font-semibold font-display">
-                  {testimonials[active].name}
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  {testimonials[active].role}
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <button
-              onClick={prev}
-              aria-label="Previous testimonial"
-              className="h-9 w-9 rounded-full border border-border bg-background flex items-center justify-center hover:bg-muted transition"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <span className="text-xs text-muted-foreground">
-              <span className="font-semibold text-primary">
-                {String(active + 1).padStart(2, "0")}
-              </span>{" "}
-              / {String(testimonials.length).padStart(2, "0")}
-            </span>
-            <button
-              onClick={next}
-              aria-label="Next testimonial"
-              className="h-9 w-9 rounded-full border border-border bg-background flex items-center justify-center hover:bg-muted transition"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
         </div>
       </div>
     </section>
@@ -613,7 +1005,7 @@ function CTASection() {
               <Users2 className="h-4 w-4 text-[#F89E2C]" />
             </div>
             <p className="text-sm text-white/80">
-              Think Big. We Do Solutions.
+              BEYOND LEARNING. BEYOND TECHNOLOGY.
             </p>
           </div>
         </div>
