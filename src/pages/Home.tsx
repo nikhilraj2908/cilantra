@@ -139,7 +139,6 @@ export default function HomePage() {
       <StatsSection />
       <WhatDrivesUsSection />
       <ServicesSection />
-      <DifferentiatorsSection />
       <IndustriesSection />
       <CTASection />
     </SiteLayout>
@@ -220,8 +219,8 @@ function HeroSection() {
 
       <div className="container-px mx-auto max-w-7xl relative z-10">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#D97706]">
-            <span className="block h-px w-7 bg-[#F89E2C]" />
+          <span className="inline-flex items-center gap-2.5 text-sm sm:text-[0.92rem] font-semibold uppercase tracking-[0.16em] text-[#D97706]">
+            <span className="block h-[1.5px] w-8 bg-[#F89E2C]" />
             BEYOND LEARNING. BEYOND TECHNOLOGY.
           </span>
           <h1 className="font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[1.08] mt-4 text-[#1E1B18] font-bold tracking-tight">
@@ -270,19 +269,6 @@ function HeroSection() {
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </motion.span>
             </Link>
-          </div>
-
-          <div className="mt-9 flex flex-wrap lg:flex-nowrap items-center gap-x-5 gap-y-2.5 text-xs sm:text-[13px] lg:whitespace-nowrap text-[#574F49]">
-            {[
-              "50+ In-house specialists",
-              "35+ Clients across 4 continents",
-              "No-subcontract quality guarantee",
-            ].map((t) => (
-              <span key={t} className="flex items-center gap-1.5 font-medium">
-                <CheckCircle2 className="h-4 w-4 text-[#F89E2C] shrink-0" />
-                {t}
-              </span>
-            ))}
           </div>
 
           {/* Slide switcher dots */}
@@ -657,8 +643,10 @@ function ServiceSlideLayer({
           </span>
 
           <h2 className="display-h2 font-bold mt-4 text-white leading-tight max-w-5xl">
-            <span className="text-[#F89E2C]">{slide.highlight}</span>{" "}
-            {slide.rest}
+            <span className="block text-[#F89E2C]">{slide.highlight}</span>
+            <span className="block mt-1 text-lg sm:text-xl md:text-2xl font-medium text-white/85">
+              {slide.rest}
+            </span>
           </h2>
         </div>
 
@@ -779,207 +767,6 @@ function ServicesSection() {
               }`}
             />
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── Differentiators ────────────────────────────────────────────────────── */
-const sixSolutions = [
-  {
-    num: "01",
-    tag: "Custom eLearning Solutions",
-    icon: BookOpen,
-    title: "Turn knowledge into capability.",
-    body: "Create meaningful learning experiences that help people not just know more, but do more.",
-    href: "/services#custom-elearning",
-  },
-  {
-    num: "02",
-    tag: "Game-Based eLearning",
-    icon: Gamepad2,
-    title: "Make learning something people look forward to.",
-    body: "Transform passive training into engaging challenges that inspire participation and improve retention.",
-    href: "/services#gamification",
-  },
-  {
-    num: "03",
-    tag: "Video, Animation & 3D",
-    icon: Video,
-    title: "Make the invisible understandable.",
-    body: "Bring complex concepts, processes and ideas to life through powerful visual storytelling.",
-    href: "/services#video-animation",
-  },
-  {
-    num: "04",
-    tag: "Websites, Apps & Moodle LMS",
-    icon: Globe,
-    title: "Connect people. Remove boundaries.",
-    body: "Build digital platforms that make learning, working and connecting easier — wherever people are.",
-    href: "/services#web-lms",
-  },
-  {
-    num: "05",
-    tag: "Branding, UI/UX & Microlearning",
-    icon: Palette,
-    title: "Make every interaction matter.",
-    body: "Create intuitive, memorable and purposeful experiences that connect people with your brand and knowledge.",
-    href: "/services#branding-design",
-  },
-  {
-    num: "06",
-    tag: "AR/VR & Audio Production",
-    icon: Headphones,
-    title: "Go beyond the ordinary experience.",
-    body: "Create immersive experiences that allow people to explore, practise and learn beyond traditional boundaries.",
-    href: "/services#ar-vr-audio",
-  },
-];
-
-function DifferentiatorsSection() {
-  return (
-    <section className="section relative overflow-hidden bg-gradient-to-b from-white via-[#FAF8F5] to-white">
-      {/* Minimal corner halftone dot clusters (masked so center stays 100% clean) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 left-0 h-64 w-64 opacity-[0.22]"
-        style={{
-          backgroundImage: "radial-gradient(#FF5E0D 1.35px, transparent 1.35px)",
-          backgroundSize: "16px 16px",
-          WebkitMaskImage: "radial-gradient(circle at 0% 0%, black 0%, transparent 72%)",
-          maskImage: "radial-gradient(circle at 0% 0%, black 0%, transparent 72%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 opacity-[0.2]"
-        style={{
-          backgroundImage: "radial-gradient(#F89E2C 1.35px, transparent 1.35px)",
-          backgroundSize: "16px 16px",
-          WebkitMaskImage: "radial-gradient(circle at 100% 100%, black 0%, transparent 72%)",
-          maskImage: "radial-gradient(circle at 100% 100%, black 0%, transparent 72%)",
-        }}
-      />
-
-      {/* Delicate flowing contour lines in top-right & bottom-left corners */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 360 220"
-        fill="none"
-        className="pointer-events-none absolute top-0 right-0 w-72 md:w-96 h-44 md:h-56 opacity-[0.22]"
-      >
-        <path d="M40,0 C120,65 210,45 360,125" stroke="#FF5E0D" strokeWidth="1.2" strokeOpacity="0.45" />
-        <path d="M80,0 C150,75 235,60 360,150" stroke="#FF5E0D" strokeWidth="1" strokeOpacity="0.32" />
-        <path d="M120,0 C180,85 260,75 360,175" stroke="#F89E2C" strokeWidth="1" strokeOpacity="0.28" />
-        <path d="M165,0 C215,92 285,92 360,200" stroke="#F89E2C" strokeWidth="0.9" strokeOpacity="0.22" />
-      </svg>
-
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 360 220"
-        fill="none"
-        className="pointer-events-none absolute bottom-0 left-0 w-72 md:w-96 h-44 md:h-56 opacity-[0.22]"
-      >
-        <path d="M0,95 C130,140 215,125 310,220" stroke="#FF5E0D" strokeWidth="1.2" strokeOpacity="0.4" />
-        <path d="M0,125 C115,162 195,152 275,220" stroke="#FF5E0D" strokeWidth="1" strokeOpacity="0.3" />
-        <path d="M0,155 C95,184 170,178 240,220" stroke="#F89E2C" strokeWidth="1" strokeOpacity="0.25" />
-      </svg>
-
-      {/* Calm ambient warm glows */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#FF5E0D]/[0.045] blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#F89E2C]/[0.05] blur-3xl"
-      />
-      <div className="container-px mx-auto max-w-6xl relative">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="eyebrow">WHY CHOOSE US</span>
-          <h2 className="display-h2 mt-3 text-[#00203D]">
-            Your success isn&apos;t just our responsibility.
-            <span className="block text-[#FF5E0D] mt-1">
-              It&apos;s our shared ambition.
-            </span>
-          </h2>
-          <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
-            Great partnerships are built on more than expertise. They are built
-            on trust, shared ambitions and the commitment to make things better
-            together.
-          </p>
-          <p className="mt-3 text-base text-[#00203D]/85 font-medium leading-relaxed">
-            At Cilantra, we bring people, creativity and technology together to
-            become more than a service provider — a partner in your progress.
-          </p>
-        </div>
-
-        <div className="mt-12">
-          <h3 className="font-display font-semibold text-2xl text-[#00203D]">
-            Six solutions. <span className="text-[#FF5E0D]">Endless possibilities.</span>
-          </h3>
-
-          <div className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sixSolutions.map((s, i) => (
-              <motion.div
-                key={s.num}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="card-elegant p-6 flex flex-col bg-card/95"
-              >
-                <div className="h-10 w-10 rounded-xl bg-[#FF5E0D]/10 flex items-center justify-center text-[#FF5E0D]">
-                  <s.icon className="h-5 w-5" />
-                </div>
-                <div className="mt-4 text-xs font-medium text-muted-foreground tracking-wide">
-                  {s.num} — {s.tag}
-                </div>
-                <h4 className="mt-1.5 font-display font-semibold text-lg text-[#00203D] leading-snug">
-                  {s.title}
-                </h4>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
-                  {s.body}
-                </p>
-                <a
-                  href={s.href}
-                  className="mt-4 inline-flex items-center text-sm font-medium text-[#FF5E0D] hover:text-[#EB061A] transition-colors"
-                >
-                  Explore solutions <ArrowRight className="ml-1.5 h-4 w-4" />
-                </a>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Ambition CTA banner */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mt-10 relative overflow-hidden rounded-2xl bg-[#1E1B18] text-white px-6 py-8 md:px-12 md:py-10 text-center shadow-elegant border border-white/10"
-          >
-            <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#FF5E0D]/20 blur-3xl pointer-events-none" />
-            <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[#F89E2C]/15 blur-3xl pointer-events-none" />
-            <h3 className="relative font-display font-semibold text-xl md:text-2xl text-white">
-              The possibilities begin with your ambition.
-            </h3>
-            <p className="relative mt-2 text-sm md:text-base text-white/85">
-              Let&apos;s build something that makes a difference.
-            </p>
-            <div className="relative mt-6">
-              <Button
-                size="lg"
-                className="bg-[#FF5E0D] text-white hover:bg-[#EB061A] shadow-[0_10px_30px_rgba(255,94,13,0.35)]"
-                asChild
-              >
-                <Link to="/services">
-                  Explore What&apos;s Possible <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

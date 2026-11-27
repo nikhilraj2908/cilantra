@@ -4,13 +4,7 @@ import {
   Menu,
   X,
   ChevronDown,
-  Plane,
-  Landmark,
-  Fuel,
-  HeartPulse,
-  ShoppingBag,
-  Cpu,
-  Building2,
+  ArrowUpRight,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
@@ -23,13 +17,43 @@ const NAV = [
   { to: "/success-stories", label: "Our Work" },
 ] as const;
 
-const KEY_SECTORS = [
-  { label: "Airlines", icon: Plane, to: "/#industries" },
-  { label: "Banking & Finance", icon: Landmark, to: "/#industries" },
-  { label: "Oil & Gas", icon: Fuel, to: "/#industries" },
-  { label: "Pharma & Healthcare", icon: HeartPulse, to: "/#industries" },
-  { label: "Retail", icon: ShoppingBag, to: "/#industries" },
-  { label: "Telecom & IT", icon: Cpu, to: "/#industries" },
+const INDUSTRY_OPTIONS = [
+  {
+    num: "01",
+    tagline: "Where knowledge builds trust.",
+    label: "Banking & Finance",
+    to: "/#industries",
+  },
+  {
+    num: "02",
+    tagline: "Where learning can change lives.",
+    label: "Pharma & Healthcare",
+    to: "/#industries",
+  },
+  {
+    num: "03",
+    tagline: "Where technology drives scale.",
+    label: "Telecom & IT",
+    to: "/#industries",
+  },
+  {
+    num: "04",
+    tagline: "From the ground to the skies.",
+    label: "Airlines & Aviation",
+    to: "/#industries",
+  },
+  {
+    num: "05",
+    tagline: "Where every interaction counts.",
+    label: "Retail & Consumer",
+    to: "/#industries",
+  },
+  {
+    num: "06",
+    tagline: "Where every decision matters.",
+    label: "Oil & Gas",
+    to: "/#industries",
+  },
 ];
 
 export function Header() {
@@ -87,49 +111,33 @@ export function Header() {
                   <div className="absolute left-1/2 -translate-x-1/2 top-full pt-6 z-50 w-[680px]">
                     <div className="rounded-2xl bg-[#141018] text-white border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.45)] p-7">
                       <div className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/50 pb-3 border-b border-white/10">
-                        Learning for Key Sectors
+                        Solutions for Key Sectors
                       </div>
 
-                      <div className="mt-5 grid grid-cols-3 gap-x-6 gap-y-5">
-                        {KEY_SECTORS.map((sector) => (
+                      <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+                        {INDUSTRY_OPTIONS.map((sector) => (
                           <Link
-                            key={sector.label}
+                            key={sector.num}
                             to={sector.to}
                             onClick={() => setIndustryMenuOpen(false)}
-                            className="group flex items-center gap-3 rounded-xl p-1.5 -m-1.5 hover:bg-white/5 transition-colors"
+                            className="group flex items-center justify-between gap-3 rounded-xl px-3 py-3 -mx-1 border-b border-white/[0.06] hover:bg-white/[0.06] transition-colors"
                           >
-                            <div className="h-10 w-10 rounded-xl border border-[#FF5E0D]/35 bg-[#FF5E0D]/10 flex items-center justify-center shrink-0 text-[#F89E2C] group-hover:bg-[#FF5E0D]/20 group-hover:border-[#FF5E0D] transition-colors">
-                              <sector.icon className="h-5 w-5" />
+                            <div className="flex items-start gap-3 min-w-0">
+                              <span className="text-xs font-semibold tabular-nums text-[#FF5E0D] mt-0.5 shrink-0">
+                                {sector.num}
+                              </span>
+                              <div className="min-w-0">
+                                <div className="text-sm font-semibold text-white group-hover:text-[#F89E2C] transition-colors leading-snug">
+                                  {sector.tagline}
+                                </div>
+                                <div className="text-xs text-white/60 mt-0.5">
+                                  {sector.label}
+                                </div>
+                              </div>
                             </div>
-                            <span className="text-sm font-semibold text-white group-hover:text-[#F89E2C] transition-colors">
-                              {sector.label}
-                            </span>
+                            <ArrowUpRight className="h-4 w-4 text-white/35 group-hover:text-[#F89E2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                           </Link>
                         ))}
-                      </div>
-
-                      <div className="mt-6 pt-5 border-t border-white/10">
-                        <div className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/50 pb-3 border-b border-white/10">
-                          Business Areas
-                        </div>
-
-                        <Link
-                          to="/#industries"
-                          onClick={() => setIndustryMenuOpen(false)}
-                          className="mt-4 group inline-flex items-center gap-3.5 rounded-xl p-1.5 -m-1.5 hover:bg-white/5 transition-colors"
-                        >
-                          <div className="h-10 w-10 rounded-xl border border-[#FF5E0D]/35 bg-[#FF5E0D]/10 flex items-center justify-center shrink-0 text-[#F89E2C] group-hover:bg-[#FF5E0D]/20 group-hover:border-[#FF5E0D] transition-colors">
-                            <Building2 className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-semibold text-white group-hover:text-[#F89E2C] transition-colors">
-                              Global Capability Centers
-                            </div>
-                            <div className="text-xs text-white/60">
-                              End-to-end learning for GCCs
-                            </div>
-                          </div>
-                        </Link>
                       </div>
                     </div>
                   </div>
