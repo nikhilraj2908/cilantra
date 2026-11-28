@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
-import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
@@ -15,16 +15,16 @@ export function Footer() {
           </p>
           <div className="mt-6 space-y-2 text-sm text-white/75">
             <a
-              href="mailto:sales@cilantra.in"
+              href="mailto:amitgupta.rc@gmail.com"
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
-              <Mail className="h-4 w-4" /> sales@cilantra.in
+              <Mail className="h-4 w-4" /> amitgupta.rc@gmail.com
             </a>
             <a
-              href="tel:+917592471667"
+              href="tel:+919109585255"
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
-              <Phone className="h-4 w-4" /> +91-7592-471667 · +91-8108771792
+              <Phone className="h-4 w-4" /> +91-9109585255 · +91-8108771792
             </a>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" /> India · Serving 4 Continents
@@ -87,23 +87,6 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-px mx-auto max-w-7xl py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/75">
           <p>© {new Date().getFullYear()} Cilantra. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <a
-              href="#"
-              className="hover:text-primary inline-flex items-center gap-1.5 transition-colors"
-            >
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
-            <a
-              href="#"
-              className="hover:text-primary inline-flex items-center gap-1.5 transition-colors"
-            >
-              <Twitter className="h-4 w-4" /> Twitter
-            </a>
-            <Link to="/auth" className="hover:text-primary transition-colors">
-              Admin
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

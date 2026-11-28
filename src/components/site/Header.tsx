@@ -5,6 +5,7 @@ import {
   X,
   ChevronDown,
   ArrowUpRight,
+  Phone,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ const NAV = [
   { to: "/about", label: "About Us" },
   { to: "/services", label: "Services" },
   { to: "/#industries", label: "Industry We Serve", hasDropdown: true },
-  { to: "/success-stories", label: "Our Work" },
+  { to: "/contact", label: "Contact Us" },
 ] as const;
 
 const INDUSTRY_OPTIONS = [
@@ -22,37 +23,37 @@ const INDUSTRY_OPTIONS = [
     num: "01",
     tagline: "Where knowledge builds trust.",
     label: "Banking & Finance",
-    to: "/#industries",
+    to: "/industries/banking-and-finance",
   },
   {
     num: "02",
     tagline: "Where learning can change lives.",
     label: "Pharma & Healthcare",
-    to: "/#industries",
+    to: "/industries/pharma-and-healthcare",
   },
   {
     num: "03",
     tagline: "Where technology drives scale.",
     label: "Telecom & IT",
-    to: "/#industries",
+    to: "/industries/telecom-and-it",
   },
   {
     num: "04",
     tagline: "From the ground to the skies.",
     label: "Airlines & Aviation",
-    to: "/#industries",
+    to: "/industries/airlines-and-aviation",
   },
   {
     num: "05",
     tagline: "Where every interaction counts.",
     label: "Retail & Consumer",
-    to: "/#industries",
+    to: "/industries/retail-and-consumer",
   },
   {
     num: "06",
     tagline: "Where every decision matters.",
     label: "Oil & Gas",
-    to: "/#industries",
+    to: "/industries/oil-and-gas",
   },
 ];
 
@@ -152,8 +153,11 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button asChild className="rounded-full px-6">
-            <Link to="/contact">Talk to Us</Link>
+          <Button asChild className="rounded-full px-5">
+            <a href="tel:+919109585255" className="inline-flex items-center gap-2">
+              <Phone className="h-3.5 w-3.5" />
+              <span>Talk to Us - +91 9109585255</span>
+            </a>
           </Button>
         </div>
 
@@ -180,10 +184,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Button asChild className="mt-2">
-              <Link to="/contact" onClick={() => setOpen(false)}>
-                Talk to Us
-              </Link>
+            <Button asChild className="mt-2 rounded-full">
+              <a
+                href="tel:+919109585255"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2"
+              >
+                <Phone className="h-4 w-4" />
+                <span>Talk to Us - +91 9109585255</span>
+              </a>
             </Button>
           </nav>
         </div>

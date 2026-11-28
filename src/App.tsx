@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import HomePage from "@/pages/Home";
 import AboutPage from "@/pages/About";
 import ServicesPage from "@/pages/Services";
+import IndustryDetailPage from "@/pages/IndustryDetail";
 import SuccessStoriesPage from "@/pages/SuccessStories";
 import SuccessStoryDetailPage from "@/pages/SuccessStoryDetail";
 import InsightsPage from "@/pages/Insights";
@@ -13,10 +14,6 @@ import AuthPage from "@/pages/Auth";
 import NotFoundPage from "@/pages/NotFound";
 import AdminLayout from "@/components/admin/AdminLayout";
 import AdminDashboard from "@/pages/admin/Dashboard";
-import AdminBlogs from "@/pages/admin/Blogs";
-import AdminBlogEditor from "@/pages/admin/BlogEditor";
-import AdminStories from "@/pages/admin/Stories";
-import AdminStoryEditor from "@/pages/admin/StoryEditor";
 import AdminMessages from "@/pages/admin/Messages";
 
 function ScrollToTop() {
@@ -45,15 +42,34 @@ function ScrollToTop() {
   return null;
 }
 
+function AdminShortcut() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === ",") {
+        e.preventDefault();
+        navigate("/admin");
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [navigate]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <>
       <ScrollToTop />
+      <AdminShortcut />
       <Routes>
         {/* Public */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/industries/:slug" element={<IndustryDetailPage />} />
         <Route path="/success-stories" element={<SuccessStoriesPage />} />
         <Route path="/success-stories/:slug" element={<SuccessStoryDetailPage />} />
         <Route path="/insights" element={<InsightsPage />} />
@@ -64,12 +80,6 @@ export default function App() {
         {/* Admin (protected) */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="blogs" element={<AdminBlogs />} />
-          <Route path="blogs/new" element={<AdminBlogEditor />} />
-          <Route path="blogs/:id" element={<AdminBlogEditor />} />
-          <Route path="success-stories" element={<AdminStories />} />
-          <Route path="success-stories/new" element={<AdminStoryEditor />} />
-          <Route path="success-stories/:id" element={<AdminStoryEditor />} />
           <Route path="messages" element={<AdminMessages />} />
         </Route>
 

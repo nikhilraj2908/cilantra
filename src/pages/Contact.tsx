@@ -323,7 +323,7 @@ export default function ContactPage() {
                   </h3>
                   <div className="mt-6 space-y-5 text-sm">
                     <a
-                      href="mailto:sales@cilantra.in"
+                      href="mailto:amitgupta.rc@gmail.com"
                       className="flex items-center gap-3.5 group"
                     >
                       <div className="h-10 w-10 rounded-xl bg-[#FF5E0D]/20 border border-[#FF5E0D]/30 flex items-center justify-center shrink-0 text-[#F89E2C] group-hover:bg-[#FF5E0D]/30 transition-colors">
@@ -332,13 +332,13 @@ export default function ContactPage() {
                       <span>
                         <div className="font-semibold text-white">Email</div>
                         <div className="text-white/75 group-hover:text-[#F89E2C] transition-colors">
-                          sales@cilantra.in
+                          amitgupta.rc@gmail.com
                         </div>
                       </span>
                     </a>
 
                     <a
-                      href="tel:+917592471667"
+                      href="tel:+919109585255"
                       className="flex items-center gap-3.5 group"
                     >
                       <div className="h-10 w-10 rounded-xl bg-[#FF5E0D]/20 border border-[#FF5E0D]/30 flex items-center justify-center shrink-0 text-[#F89E2C] group-hover:bg-[#FF5E0D]/30 transition-colors">
@@ -347,7 +347,7 @@ export default function ContactPage() {
                       <span>
                         <div className="font-semibold text-white">Phone</div>
                         <div className="text-white/75 group-hover:text-[#F89E2C] transition-colors">
-                          +91-7592-471667 | +91-8108771792
+                           +91-9109585255 | +91-8108771792
                         </div>
                       </span>
                     </a>
@@ -358,7 +358,7 @@ export default function ContactPage() {
                       </div>
                       <span>
                         <div className="font-semibold text-white">Location</div>
-                        <div className="text-white/75">Pan-India delivery</div>
+                        <div className="text-white/75">India</div>
                       </span>
                     </div>
                   </div>

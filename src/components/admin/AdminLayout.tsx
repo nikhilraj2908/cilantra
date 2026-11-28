@@ -2,8 +2,6 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
-  FileText,
-  Trophy,
   LogOut,
   Menu,
   X,
@@ -15,13 +13,6 @@ import { useAuth } from "@/context/AuthContext";
 
 const NAV = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { to: "/admin/blogs", label: "Blogs", icon: FileText, exact: false },
-  {
-    to: "/admin/success-stories",
-    label: "Success Stories",
-    icon: Trophy,
-    exact: false,
-  },
   { to: "/admin/messages", label: "Messages", icon: Mail, exact: false },
 ] as const;
 
