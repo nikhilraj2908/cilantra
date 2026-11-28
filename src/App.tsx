@@ -7,8 +7,6 @@ import ServicesPage from "@/pages/Services";
 import IndustryDetailPage from "@/pages/IndustryDetail";
 import SuccessStoriesPage from "@/pages/SuccessStories";
 import SuccessStoryDetailPage from "@/pages/SuccessStoryDetail";
-import InsightsPage from "@/pages/Insights";
-import BlogDetailPage from "@/pages/BlogDetail";
 import ContactPage from "@/pages/Contact";
 import AuthPage from "@/pages/Auth";
 import NotFoundPage from "@/pages/NotFound";
@@ -72,8 +70,6 @@ export default function App() {
         <Route path="/industries/:slug" element={<IndustryDetailPage />} />
         <Route path="/success-stories" element={<SuccessStoriesPage />} />
         <Route path="/success-stories/:slug" element={<SuccessStoryDetailPage />} />
-        <Route path="/insights" element={<InsightsPage />} />
-        <Route path="/insights/:slug" element={<BlogDetailPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/auth" element={<AuthPage />} />
 
